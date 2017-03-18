@@ -1,0 +1,24 @@
+xcodeproj '/Users/alvar-mac/git/koda-ios/Koda.nu.xcodeproj/'
+
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '10.0'
+use_frameworks!
+
+target 'Koda.nu' do
+    pod 'SwiftyJSON'
+    pod 'Firebase/Core'
+    pod 'Firebase/Messaging'
+    pod 'Alamofire'
+    pod 'Kingfisher', '~> 3.0'
+    pod 'RealmSwift'
+    pod 'QRCode'
+        
+    post_install do |installer|
+      installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+          config.build_settings['SWIFT_VERSION'] = '3.0' # or '3.0'
+        end
+      end
+    end
+
+end

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Dv8-NU-7a6">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--About-->
+        <scene sceneID="Oz1-NW-N8k">
+            <objects>
+                <viewControllerPlaceholder storyboardName="About" id="bSd-vI-Yln" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wey-sJ-hOE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1327.5" y="1806"/>
+        </scene>
+        <!--Inställningar-->
+        <scene sceneID="UnQ-8I-hIj">
+            <objects>
+                <tableViewController title="Inställningar" id="Dv8-NU-7a6" customClass="SettingsViewController" customModule="Koda_nu" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Hyx-1d-syF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <sections>
+                            <tableViewSection headerTitle="Din nick" footerTitle="Visas om du delar något på Arkivet" id="2Ga-8R-hGi">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" id="rI1-DD-Yhd">
+                                        <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rI1-DD-Yhd" id="Zbz-eq-ywj">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Din nick:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y7V-OH-hWl">
+                                                    <rect key="frame" x="16" y="7" width="512" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="nickNameEditBegan:" destination="Dv8-NU-7a6" eventType="editingDidBegin" id="JeF-L5-T3a"/>
+                                                        <action selector="nickNameEditEnded:" destination="Dv8-NU-7a6" eventType="editingDidEnd" id="yQ8-h1-Zn0"/>
+                                                    </connections>
+                                                </textField>
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PxK-LQ-0EA">
+                                                    <rect key="frame" x="542" y="7" width="41" height="30"/>
+                                                    <state key="normal" title="Ändra"/>
+                                                    <connections>
+                                                        <action selector="nickNameEditButtonAction:" destination="Dv8-NU-7a6" eventType="touchUpInside" id="z8m-cO-6KB"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="PxK-LQ-0EA" secondAttribute="trailing" constant="5" id="cgU-Wt-g6V"/>
+                                                <constraint firstItem="Y7V-OH-hWl" firstAttribute="leading" secondItem="Zbz-eq-ywj" secondAttribute="leadingMargin" constant="8" id="kha-z2-fAJ"/>
+                                                <constraint firstItem="Y7V-OH-hWl" firstAttribute="centerY" secondItem="Zbz-eq-ywj" secondAttribute="centerY" id="koZ-0j-T1m"/>
+                                                <constraint firstItem="PxK-LQ-0EA" firstAttribute="centerY" secondItem="Zbz-eq-ywj" secondAttribute="centerY" id="qoN-SD-sXq"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Om" id="jPF-sO-N61">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="TBK-Dg-WSA">
+                                        <rect key="frame" x="0.0" y="169" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TBK-Dg-WSA" id="Pft-km-2lm">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3qL-pp-8fO">
+                                                    <rect key="frame" x="16" y="0.0" width="584" height="43"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <state key="normal" title="Om appen">
+                                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <segue destination="bSd-vI-Yln" kind="show" id="Qgt-k0-uMO"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="3qL-pp-8fO" firstAttribute="leading" secondItem="Pft-km-2lm" secondAttribute="leadingMargin" constant="8" id="6hr-as-7q1"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="3qL-pp-8fO" secondAttribute="bottom" constant="-8" id="Q6p-72-W5J"/>
+                                                <constraint firstItem="3qL-pp-8fO" firstAttribute="top" secondItem="Pft-km-2lm" secondAttribute="topMargin" constant="-8" id="WZT-3r-jYh"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="3qL-pp-8fO" secondAttribute="trailing" constant="-8" id="scU-TV-YPO"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Ditt konto" id="iwA-Rl-XwQ">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="GSo-DZ-urs">
+                                        <rect key="frame" x="0.0" y="270" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GSo-DZ-urs" id="J4g-PP-H45">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i8z-mm-q1R">
+                                                    <rect key="frame" x="16" y="0.0" width="584" height="43"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <state key="normal" title="Logga ut">
+                                                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="logOut:" destination="Dv8-NU-7a6" eventType="touchUpInside" id="INE-6s-qqb"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="i8z-mm-q1R" firstAttribute="top" secondItem="J4g-PP-H45" secondAttribute="topMargin" constant="-8" id="5Cb-XC-HdD"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="i8z-mm-q1R" secondAttribute="bottom" constant="-8" id="8Bp-66-Toa"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="i8z-mm-q1R" secondAttribute="trailing" constant="-8" id="JPe-ga-7Ju"/>
+                                                <constraint firstItem="i8z-mm-q1R" firstAttribute="leading" secondItem="J4g-PP-H45" secondAttribute="leadingMargin" constant="8" id="qIz-Ox-lty"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="Dv8-NU-7a6" id="HA8-Qd-vh1"/>
+                            <outlet property="delegate" destination="Dv8-NU-7a6" id="vkG-Sk-HiN"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Inställningar" id="QrL-LR-hab">
+                        <barButtonItem key="rightBarButtonItem" image="qr" id="CiU-Ge-RUx">
+                            <connections>
+                                <segue destination="6Ny-ac-JGJ" kind="show" id="10J-Kx-G9j"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="nickNameButton" destination="PxK-LQ-0EA" id="43L-Fo-urY"/>
+                        <outlet property="nickNameTextField" destination="Y7V-OH-hWl" id="89x-PL-lHt"/>
+                        <outlet property="table" destination="Hyx-1d-syF" id="9Ud-wK-UjB"/>
+                        <segue destination="ekD-Fv-KnG" kind="presentation" identifier="showLogin" id="abr-3K-LNz"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HTj-QA-6Hn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="893" y="1726"/>
+        </scene>
+        <!--QRScanner-->
+        <scene sceneID="x25-pa-D9O">
+            <objects>
+                <viewControllerPlaceholder storyboardName="QRScanner" id="6Ny-ac-JGJ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jlO-uk-Ycr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1327" y="1701"/>
+        </scene>
+        <!--Login-->
+        <scene sceneID="9bY-xt-aqe">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Login" id="ekD-Fv-KnG" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d4f-2H-igQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1327.5" y="1750"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="qr" width="25" height="25"/>
+    </resources>
+</document>

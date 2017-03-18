@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="1eC-Ej-cGH">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Om appen-->
+        <scene sceneID="WQu-Y3-zCH">
+            <objects>
+                <viewController definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" hidesBottomBarWhenPushed="YES" id="1eC-Ej-cGH" customClass="AboutController" customModule="Koda_nu" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="O3G-WA-7nk"/>
+                        <viewControllerLayoutGuide type="bottom" id="zgC-7T-Meq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wPs-7r-yVx">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Om5-pq-4I8">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lcn-ao-fni">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="W9l-8f-s3k">
+                                                <rect key="frame" x="8" y="8" width="100" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="wGZ-l9-WFA"/>
+                                                    <constraint firstAttribute="width" constant="100" id="xc9-Nt-FAs"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Koda.nu för iOS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EyO-n7-2VX">
+                                                <rect key="frame" x="116" y="25" width="413" height="26"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="CC BY-SA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x0a-b2-gvE">
+                                                <rect key="frame" x="116" y="73" width="413" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mAC-pv-XJj">
+                                                <rect key="frame" x="13" y="116" width="570" height="25"/>
+                                                <string key="text">Den här appen skapades 2016 som ett projekt för
+Internetfonden, internetfonden.se. Internetfonden finansieras av
+Internetstiftelsen i Sverige, IIS, som jobbar med att driva på en
+positiv utveckling av Internet i Sverige.
+
+Målet med koda.nu är att göra det lättare och roligare att lära sig
+programmering.
+
+Apputvecklare: Alvar Lagerlöf
+Instagram: @alvarlagerlof
+Github: github.com/alvarlagerlof
+
+Ansvarig för koda.nu: Mikael Tylmad
+Epost: mikael@roboro.se</string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Version " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hl5-ao-Mh1">
+                                                <rect key="frame" x="116" y="53" width="413" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="Hl5-ao-Mh1" firstAttribute="leading" secondItem="W9l-8f-s3k" secondAttribute="trailing" constant="8" id="9tt-ru-gMM"/>
+                                            <constraint firstItem="mAC-pv-XJj" firstAttribute="top" secondItem="W9l-8f-s3k" secondAttribute="bottom" constant="8" id="Bs6-70-oAV"/>
+                                            <constraint firstItem="Hl5-ao-Mh1" firstAttribute="top" secondItem="EyO-n7-2VX" secondAttribute="bottom" constant="2" id="FXm-fc-wz8"/>
+                                            <constraint firstItem="x0a-b2-gvE" firstAttribute="top" secondItem="EyO-n7-2VX" secondAttribute="bottom" constant="22" id="H0o-9K-52R"/>
+                                            <constraint firstItem="x0a-b2-gvE" firstAttribute="leading" secondItem="W9l-8f-s3k" secondAttribute="trailing" constant="8" id="QM4-rv-8BV"/>
+                                            <constraint firstItem="W9l-8f-s3k" firstAttribute="leading" secondItem="lcn-ao-fni" secondAttribute="leading" constant="8" id="WZy-5r-4zF"/>
+                                            <constraint firstItem="EyO-n7-2VX" firstAttribute="top" secondItem="lcn-ao-fni" secondAttribute="top" constant="25" id="aMR-Eq-0NP"/>
+                                            <constraint firstItem="EyO-n7-2VX" firstAttribute="leading" secondItem="W9l-8f-s3k" secondAttribute="trailing" constant="8" id="dgV-cM-yK5"/>
+                                            <constraint firstItem="mAC-pv-XJj" firstAttribute="leading" secondItem="lcn-ao-fni" secondAttribute="leading" constant="16" id="lIk-3V-ByO">
+                                                <variation key="widthClass=compact" constant="13"/>
+                                            </constraint>
+                                            <constraint firstItem="W9l-8f-s3k" firstAttribute="top" secondItem="lcn-ao-fni" secondAttribute="top" constant="8" id="r8u-mp-u7a"/>
+                                            <constraint firstAttribute="trailing" secondItem="mAC-pv-XJj" secondAttribute="trailing" constant="16" id="z0G-rJ-SYZ">
+                                                <variation key="widthClass=compact" constant="13"/>
+                                            </constraint>
+                                        </constraints>
+                                        <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
+                                        </variation>
+                                        <variation key="widthClass=regular" ambiguous="YES" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
+                                        </variation>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="lcn-ao-fni" firstAttribute="top" secondItem="Om5-pq-4I8" secondAttribute="top" id="0sg-Yx-NQA"/>
+                                    <constraint firstItem="lcn-ao-fni" firstAttribute="width" secondItem="Om5-pq-4I8" secondAttribute="width" id="PxH-i7-IWj"/>
+                                    <constraint firstAttribute="bottom" secondItem="lcn-ao-fni" secondAttribute="bottom" id="sQX-fS-d3t"/>
+                                    <constraint firstAttribute="trailing" secondItem="lcn-ao-fni" secondAttribute="trailing" id="yhV-He-xU0"/>
+                                    <constraint firstItem="lcn-ao-fni" firstAttribute="leading" secondItem="Om5-pq-4I8" secondAttribute="leading" id="ztn-Ps-5iq"/>
+                                </constraints>
+                                <variation key="widthClass=compact" ambiguous="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
+                                </variation>
+                                <variation key="widthClass=regular" ambiguous="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
+                                </variation>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zgC-7T-Meq" firstAttribute="top" secondItem="Om5-pq-4I8" secondAttribute="bottom" id="0L1-5y-gnV"/>
+                            <constraint firstItem="Om5-pq-4I8" firstAttribute="leading" secondItem="wPs-7r-yVx" secondAttribute="leadingMargin" constant="-20" id="Dg9-QF-R3Z"/>
+                            <constraint firstItem="Om5-pq-4I8" firstAttribute="top" secondItem="wPs-7r-yVx" secondAttribute="topMargin" id="Frl-WG-cAB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Om5-pq-4I8" secondAttribute="trailing" constant="-20" id="xkI-aw-Rqm"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Om appen" id="5rW-aH-yLX"/>
+                    <connections>
+                        <outlet property="descriptionTextView" destination="mAC-pv-XJj" id="fBg-Lc-8kM"/>
+                        <outlet property="versionTextView" destination="Hl5-ao-Mh1" id="iyc-mn-KCc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U1Q-5Y-VCD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="535" y="306"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icon" width="512" height="512"/>
+    </resources>
+</document>
