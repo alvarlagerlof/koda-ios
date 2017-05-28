@@ -1,37 +1,45 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="4ad-hZ-22R">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4ad-hZ-22R">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Dela QR kod-->
         <scene sceneID="laW-ga-Hk2">
             <objects>
-                <viewController definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" id="4ad-hZ-22R" customClass="QRViewerViewController" customModule="Koda_nu" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="QRViewer" extendedLayoutIncludesOpaqueBars="YES" definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" id="4ad-hZ-22R" customClass="QRViewerViewController" customModule="Koda_nu" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UhR-1E-VMp"/>
                         <viewControllerLayoutGuide type="bottom" id="tHU-VD-CPI"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="otL-cV-SiQ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G1p-1g-Xfj">
-                                <rect key="frame" x="180" y="102" width="240" height="240"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="G1p-1g-Xfj">
+                                <rect key="frame" x="77" y="112" width="220" height="220"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="220" id="UQ9-M8-2jp"/>
+                                    <constraint firstAttribute="height" constant="220" id="oEt-bO-WQg"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Skanna på en annan enhet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pKp-gs-Pf8">
-                                <rect key="frame" x="199" y="390" width="202" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skanna på en annan enhet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pKp-gs-Pf8">
+                                <rect key="frame" x="87" y="380" width="202" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.32726362180000002" green="0.32726362180000002" blue="0.32726362180000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.32726362180000002" green="0.32726362180000002" blue="0.32726362180000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="G1p-1g-Xfj" firstAttribute="centerX" secondItem="otL-cV-SiQ" secondAttribute="centerX" id="LSi-Fu-dGk"/>
                             <constraint firstItem="pKp-gs-Pf8" firstAttribute="centerX" secondItem="otL-cV-SiQ" secondAttribute="centerX" id="Qwh-YY-W46"/>
-                            <constraint firstItem="G1p-1g-Xfj" firstAttribute="top" secondItem="UhR-1E-VMp" secondAttribute="bottom" constant="38" id="R7S-1a-LHo"/>
+                            <constraint firstItem="G1p-1g-Xfj" firstAttribute="top" secondItem="UhR-1E-VMp" secondAttribute="bottom" constant="48" id="R7S-1a-LHo"/>
                             <constraint firstItem="pKp-gs-Pf8" firstAttribute="top" secondItem="G1p-1g-Xfj" secondAttribute="bottom" constant="48" id="u2E-hq-r7a"/>
                         </constraints>
                     </view>

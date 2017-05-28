@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Firebase
 
 class ForgotPassViewController: UIViewController {
 
@@ -18,6 +19,9 @@ class ForgotPassViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Analytics.logEvent("login_forgot_open", parameters: [:])
+
         
         setUpTextField(emailTextField)
         setUpButton(nextButton)
@@ -62,6 +66,9 @@ class ForgotPassViewController: UIViewController {
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
         
+        Analytics.logEvent("login_forgor_button_pressed", parameters: [:])
+
+        
         if !Reachability.isConnectedToNetwork() {
             let alert = UIAlertController(title: "Ingen ansluting", message: "Gå in på inställingar och se till att WiFi eller mobildata är på", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
@@ -69,21 +76,23 @@ class ForgotPassViewController: UIViewController {
             
         } else {
             let url = Vars.URL_LOGIN_FORGOT
-            
+        
             let parameters = [
                 "email": emailTextField.text! as String,
                 "verification_reset": "7",
                 "headless": "thisisheadless"
             ]
             
-            Alamofire.request(URL(string: url)!, parameters: parameters)
+            self.showWaitOverlay()
+            
+            Alamofire.request(URL(string: url)!, method: .post, parameters: parameters)
                 .responseString { response in
                     
                     
                     let json = JSON(data: response.result.value!.data(using: String.Encoding.utf8)!, options: JSONSerialization.ReadingOptions.mutableContainers, error: nil)
                     
                     
-                    let alert = UIAlertController(title: json["message"].string, message: nil, preferredStyle: UIAlertControllerStyle.alert)
+                    let alert = UIAlertController(title: nil, message: json["message"].string, preferredStyle: UIAlertControllerStyle.alert)
                     
                     let okActionClose = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
                         UIAlertAction in
@@ -96,10 +105,15 @@ class ForgotPassViewController: UIViewController {
                     
                     if (json["success"].stringValue == "true") {
                         alert.addAction(okActionClose)
+                        Analytics.logEvent("login_forgot_successful", parameters: [:])
+
                     } else {
                         alert.addAction(okAction)
+                        Analytics.logEvent("login_forgot_failed", parameters: [:])
                     }
                     
+                    self.removeAllOverlays()
+
                     
                     self.present(alert, animated: true, completion: nil)
             }

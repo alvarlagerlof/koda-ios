@@ -10,126 +10,176 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import SwiftOverlays
+import Firebase
+
 
 class ApiViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var listArray = [ApiItem]()
+    
+    var currentList = [ApiItem]()
+    
+    var list2d = [ApiItem]()
+    var list3d = [ApiItem]()
+    
+    enum apiVersion {
+        case api2d
+        case api3d
+    }
+    
+   
 
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var segmentController: UISegmentedControl!
-    @IBOutlet weak var activityIndicatior: UIActivityIndicatorView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        parseJSON(Vars.URL_API_2D)
-        
+        // Init
         self.table.rowHeight = UITableViewAutomaticDimension
         self.table.estimatedRowHeight = 140
         self.table.tableFooterView = UIView(frame: CGRect.zero)
 
         
+        // Load first
+        getData(list: self.list2d, version: apiVersion.api2d)
+        
         
     }
     
-    // Default crap
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return listArray.count }
-    
-    func numberOfSections(in tableView: UITableView) -> Int { return 1 }
-    
-    
-    // Poulate views
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        var cell: UITableViewCell
-        
-        if (listArray[indexPath.row].type == "offline") {
-            
-            cell = self.table.dequeueReusableCell(withIdentifier: "cellOffline", for: indexPath) as! ApiOfflineViewCell
-            
-        } else {
-            
-            let cell2 = self.table.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ApiViewCell
-            
-            cell2.commandLabel.text = listArray[indexPath.row].command
-            cell2.descriptionLabel.text = listArray[indexPath.row].description
-            
-            cell = cell2
-            
-        }
-        
-        return cell
-    }
-    
-    
-    
-    func parseJSON(_ url: String) {
-        let baseURL = URL(string: url)
-        
-        listArray.removeAll()
-        
-        self.table.isHidden = true
-        self.activityIndicatior.startAnimating()
-        
-        Alamofire.request(baseURL!)
-            .responseString { response in
-                
-                switch response.result {
-                case .success( _:):
-                    
-                    var readableJSON = JSON(data: response.result.value!.data(using: String.Encoding.utf8)!, options: JSONSerialization.ReadingOptions.mutableContainers, error: nil)
-                    
-                    for i in 0..<readableJSON.count {
-                                        
-                        // Add to list
-                        self.listArray += [ApiItem(
-                            type: "normal",
-                            command: readableJSON[i, "command"].stringValue,
-                            description: readableJSON[i, "description"].stringValue)]
-                        
-                    }
-                    
-                    // Reload tableview and stop spinner
-                    self.activityIndicatior.stopAnimating()
-                    self.table.isHidden = false
-                    self.table.reloadData()
-                    
-                    
-                case .failure( _:):
-                    
-                    // Add to list
-                    self.listArray += [ApiItem(
-                        type: "offline",
-                        command: "",
-                        description: "")]
-                    
-                    
-                    self.activityIndicatior.stopAnimating()
-                    self.table.isHidden = false
-                    self.table.reloadData()
-                    
-                    
-                }
 
-                
-        
-        }
-        
-    }
-
+    
     
     @IBAction func segmentChange(_ sender: UISegmentedControl) {
         
         table.setContentOffset(CGPoint.zero, animated: false)
         
-        if (segmentController.selectedSegmentIndex == 0) {
-            parseJSON(Vars.URL_API_2D)
-        } else {
-            parseJSON(Vars.URL_API_3D)
+        switch segmentController.selectedSegmentIndex {
+            case 0:
+                getData(list: self.list2d, version: apiVersion.api2d)
+                Analytics.logEvent("api_tab_2d", parameters: [:])
+            case 1:
+                getData(list: self.list3d, version: apiVersion.api3d)
+                Analytics.logEvent("api_tab_3d", parameters: [:])
+
+            default:
+                print("more than two tabs")
+            
         }
+        
+    }
+    
+    
+    
+    
+    func getData(list: Array<ApiItem>, version: apiVersion) {
+        
+        // Create tmp list with recived data
+        var tmpList = list
+        
+        
+        // If already loaded
+        if tmpList.count > 0 && tmpList[0].type != .offline {
+            
+            // Set to already loaded
+            self.currentList = tmpList
+            self.table.reloadData()
+            
+        } else {
+            
+            // Prepare table
+            self.table.isHidden = true
+            self.showWaitOverlay()
+            
+            
+            Alamofire.request(URL(string: version == apiVersion.api2d ? Vars.URL_API_2D : Vars.URL_API_3D)!)
+                .responseString { response in
+                    
+                    switch response.result {
+                        case .success( _:):
+                        
+                            for (_, subJson):(String, JSON) in JSON(data: response.result.value!.data(using: String.Encoding.utf8)!, options: JSONSerialization.ReadingOptions.mutableContainers, error: nil) {
+                                tmpList += [ApiItem(
+                                    type: .normal,
+                                    command: subJson["command"].stringValue,
+                                    description: subJson["description"].stringValue)]
+                            }
+                  
+                        
+                        case .failure( _:):
+                            
+                            tmpList.removeAll()
+                        
+                            tmpList += [ApiItem(
+                                type: .offline,
+                                command: "",
+                                description: "")]
+                        
+                        
+                    }
+                    
+                    
+                    // Set to cached list
+                    switch version {
+                        case .api2d:
+                            self.list2d = tmpList
+                        case .api3d:
+                            self.list3d = tmpList
+                    }
+                    
+                    
+                    // Show in table
+                    self.currentList = tmpList
+                    self.removeAllOverlays()
+                    self.table.isHidden = false
+                    self.table.reloadData()
+                    
+                    
+            }
+            
+        }
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    // Poulate views
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        switch currentList[indexPath.row].type {
+            case .offline:
+                return self.table.dequeueReusableCell(withIdentifier: "cellOffline", for: indexPath) as! ApiOfflineViewCell
+            
+            case .normal:
+                let cell = self.table.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ApiViewCell
+            
+                cell.commandLabel.text = currentList[indexPath.row].command
+                cell.descriptionLabel.text = currentList[indexPath.row].description
+            
+                return cell
+            
+        }
+        
     }
 
+    
+    // Default crap
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return currentList.count }
+    
+    func numberOfSections(in tableView: UITableView) -> Int { return 1 }
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        print("api")
+    }
+    
+    
     
     
 }

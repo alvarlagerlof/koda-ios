@@ -12,6 +12,7 @@ class PlayViewController: UIViewController {
     
     var recivedUrl: String = ""
     var recivedTitle: String = ""
+    var recivedAuthor: String = ""
     
     @IBOutlet weak var gameWebView: UIWebView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -27,12 +28,14 @@ class PlayViewController: UIViewController {
         gameWebView.scalesPageToFit = true
         
         
-        let gameUrl = URL (string: recivedUrl)
+        let gameUrl = URL(string: recivedUrl)
         let requestObj = URLRequest(url: gameUrl!);
         gameWebView.loadRequest(requestObj)
         gameWebView.scrollView.isScrollEnabled = false
         
         
+        print(recivedTitle)
+        print(recivedUrl)
         
         
         
@@ -41,33 +44,75 @@ class PlayViewController: UIViewController {
     
     // Reload
     @IBAction func refresh(_ sender: UIBarButtonItem) {
-        gameWebView.reload()
+        activityIndicator.startAnimating()
+        gameWebView.isHidden = true
+        gameWebView.goBack()
+        let gameUrl = URL(string: recivedUrl)
+        let requestObj = URLRequest(url: gameUrl!);
+        gameWebView.loadRequest(requestObj)
     }
+    
     
     // Share
     @IBAction func share(_ sender: UIBarButtonItem) {
         
-        var message: String = ""
         
-        if (recivedTitle != "Spela") {
-            message = "Kolla in \(recivedTitle) på Koda.nu! \(recivedUrl)"
-        } else {
-            message = recivedUrl
-        }
+        // Create action sheet
+        let optionMenu: UIAlertController = UIAlertController(title: "Dela " + self.recivedTitle, message: nil, preferredStyle: .actionSheet)
         
-        let vc = UIActivityViewController(activityItems: [message], applicationActivities: nil)
         
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            //let popOver: UIPopoverController = UIPopoverController(contentViewController: vc)
-            //popOver.presentPopoverFromBarButtonItem(self.shareButton, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
+        // Share
+        optionMenu.addAction(UIAlertAction(title: "Dela via app", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            let message = "Kolla in "+self.recivedTitle+" av "+self.recivedAuthor+" på Koda.nu! " + self.recivedUrl
             
-        } else {
-            self.present(vc, animated: true, completion: nil)
-        }
+            let vc = UIActivityViewController(activityItems: [message], applicationActivities: nil)
+            ViewHelper().getRoot().present(vc, animated: true, completion: nil)
+            
+        }))
+        
+        
+        // QR share
+        optionMenu.addAction(UIAlertAction(title: "Dela via QR kod", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            
+            
+            let storyboard = UIStoryboard(name: "QRViewer", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "QRViewer") as! QRViewerViewController
+            
+            vc.recivedUrl = "http://koda.nu/arkiver/" + self.recivedUrl
+            vc.recivedTitle = self.recivedTitle
+            
+            
+            ViewHelper().getRoot().present(vc, animated: true)
+            
+            
+            
+        }))
+        
+        
+     
+        // Cancel
+        optionMenu.addAction(UIAlertAction(title: "Avbryt", style: .cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+        }))
+        
+    
+        
+        // Show
+        //optionMenu.popoverPresentationController?.sourceView = sender
+        ViewHelper().getRoot().present(optionMenu, animated: true, completion: nil)
+
+        
         
         
         
     }
+    
+    
+
+    
+    
     
     
     // Stop spinner

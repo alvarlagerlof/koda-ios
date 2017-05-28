@@ -10,201 +10,256 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 import RealmSwift
+import FirebaseAnalytics
+import SwiftOverlays
 
 public class ProjectsSync {
 
-    let realm = try! Realm()
-
+    var openPrivateID: String = ""
+    var sendNothing: Bool = false
+    var nav: UINavigationController? = nil
     
-    public func sync() {
+    
+    init() {
+                
         
-        print("Sync")
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProjectsStarted"), object: self)
+
+        if Reachability.isConnectedToNetwork() {
+            sendToServer()
+        } else {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProjectsDoneOffline"), object: self)
+        }
+    }
+    
+    
+    init(openPrivateID: String, sendNothing: Bool, nav: UINavigationController) {
+        self.sendNothing = true
+        self.openPrivateID = openPrivateID
+        self.nav = nav
+
+        if Reachability.isConnectedToNetwork() {
+            sendToServer()
+        } else {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProjectsDoneOffline"), object: self)
+        }
+    }
+    
+    
+    init(openPrivateID: String, nav: UINavigationController) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProjectsStarted"), object: self)
+        self.openPrivateID = openPrivateID
+        self.nav = nav
         
-        // If connected to internet
-        if (Reachability.isConnectedToNetwork()) {
+        if Reachability.isConnectedToNetwork() {
+            sendToServer()
             
-            Alamofire.request(URL(string: Vars.URL_PROJECTS)!)
-                .responseString { response in
+        } else {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProjectsDoneOffline"), object: self)
+
+            let storyboard = UIStoryboard(name: "Editor", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "editor") as! EditorViewController
+            vc.privateID = self.openPrivateID
+            self.nav?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    
+   
+    
+    
+    
+    func sendToServer() {
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+        
+
+            let realm = try! Realm()
+            
+            
+            // Get all realm projects
+            let realmProjects = realm.objects(ProjectsRealmItem.self)
+            
+            
+            
+            // Create json array
+            var projects: [JSON] = []
+            
+            
+            // Loop over realm projects
+            for realmProject: ProjectsRealmItem in realmProjects {
+                
+                
+                var jsonObject: JSON = ["privateID": realmProject.privateID,
+                                        "updated": realmProject.updatedServer]
+                
+                if !realmProject.isSynced {
+                    jsonObject["title"].string       = Base64Helper.encode(decoded: realmProject.title)
+                    jsonObject["description"].string = Base64Helper.encode(decoded: realmProject.descriptionText)
+                    jsonObject["public"].bool        = realmProject.isPublic
+                    jsonObject["code"].string        = Base64Helper.encode(decoded: realmProject.code)
+                }
+                
+                projects.append(jsonObject)
+
+                
+            }
+            
+            
+            
+            var parameters: Parameters = ["projects": JSON(projects)]
+            
+            if (realmProjects.count == 0 || self.sendNothing) {
+                parameters = ["projects": "[]"]
+            }
+            
+            
+            Alamofire.request(Vars.URL_PROJECTS_SYNC, method: .post, parameters: parameters).responseJSON { response in
+               
+                switch response.result {
+                    case .success:
+                        DispatchQueue.main.async {
+                            self.dealWithResponse(response: JSON(response.result.value as Any))
+                        }
                     
-                    print(response.result.value)
+                    case .failure(let error):
+                        print(error)
+                    
+                }
+                
+            }
+        }
+        
+    }
+    
+    
+    
+    func dealWithResponse(response: JSON) {
+    
+        DispatchQueue.global(qos: .userInitiated).async {
+            
+            let realm = try! Realm()
 
-                    if response.result.isSuccess {
+            // Get child "projects" -> Array
+            let responseArray: Array = response["projects"].arrayValue
+            
+            // If resonse is not empty 
+            if responseArray.count > 0 {
+                
+                // Loop over response
+                for responseItem in responseArray {
+                    
+                    
+                    // Get realm project based on privateID
+                    // and deal with nil
+                    if let realmProject: ProjectsRealmItem = realm.objects(ProjectsRealmItem.self).filter("privateID = '" + responseItem["old_privateID"].string! + "'").first {
                         
                         
-                        // Response to json
-                        var response = JSON(data: response.result.value!.data(using: String.Encoding.utf8)!, options: JSONSerialization.ReadingOptions.mutableContainers, error: nil)
-                        
-                        
-                        // Update nick name
-                        var nickName = response["user", "nick"].stringValue
-                        if (nickName != "") {
-                            let decodedNickName = Data(base64Encoded: nickName, options: NSData.Base64DecodingOptions(rawValue: 0))
-                            nickName = NSString(data: decodedNickName!, encoding: String.Encoding.utf8.rawValue) as! String
-                            UserDefaults.standard.set(nickName, forKey: Vars.USERDEFAULT_NICK_NAME)
+                        // Edit existing one
+                        try! realm.write {
+                            realmProject.privateID       = responseItem["privateID"].string!
+                            realmProject.publicID        = responseItem["publicID"].string!
+                            realmProject.title           = Base64Helper.decode(encoded: responseItem["title"].string!)
+                            realmProject.descriptionText = Base64Helper.decode(encoded: responseItem["description"].string!)
+                            realmProject.code            = Base64Helper.decode(encoded: responseItem["code"].string!)
+                            realmProject.isSynced        = true
+                            realmProject.isPublic        = responseItem["public"].bool!
+                            realmProject.updatedServer   = String(describing: responseItem["updated"])
+                            realmProject.updatedRealm    = String(describing: responseItem["updated"])
+                            
+                            
+                            if (realmProject.title == "") { realmProject.title = "Namnlös" }
                         }
+                    } else {
                         
+                        // Create new
+                        let newRealmProject = ProjectsRealmItem()
+                        newRealmProject.privateID       = responseItem["privateID"].string!
+                        newRealmProject.publicID        = responseItem["publicID"].string!
+                        newRealmProject.title           = Base64Helper.decode(encoded: responseItem["title"].string!)
+                        newRealmProject.descriptionText = Base64Helper.decode(encoded: responseItem["description"].string!)
+                        newRealmProject.code            = Base64Helper.decode(encoded: responseItem["code"].string!)
+                        newRealmProject.isSynced        = true
+                        newRealmProject.isPublic        = responseItem["public"].bool!
+                        newRealmProject.updatedServer   = String(describing: responseItem["updated"])
+                        newRealmProject.updatedRealm    = String(describing: responseItem["updated"])
                         
-                        print(nickName)
+                        if (newRealmProject.title == "") { newRealmProject.title = "Namnlös" }
                         
-                        
-                        
-                        
-                        
-                        // Create a lists with server and realm projects
-                        var serverProjects: JSON = response["games"]
-                        let realmProjects = self.realm.objects(ProjectsRealmItem.self)
-                        
-                        
-                        
-                        // Loop over server projects
-                        for i in 0..<serverProjects.count {
-                            
-                            let serverProject = serverProjects[i]
-                            let realmProject = self.realm.objects(ProjectsRealmItem.self)
-                                .filter("privateID = '\(serverProject["privateID"].stringValue)'")
-                                .first
-
-
-                            if (realmProject != nil) {
-                                
-                                // If it does exist on the server
-                                self.updateOldest(realmProject: realmProject!, serverProject: serverProject)
-                                
-                            } else {
-                            
-                                // If it does NOT exist on realm
-                                let object = ProjectsRealmItem()
-                                object.privateID = serverProject["privateID"].stringValue
-                                object.publicID = serverProject["publicID"].stringValue
-                                object.title = Base64Helper.decode(encoded: serverProject["title"].stringValue)
-                                object.descriptionText = Base64Helper.decode(encoded: serverProject["description"].stringValue)
-                                object.updated = serverProject["updated"].stringValue
-                                object.code = Base64Helper.decode(encoded: serverProject["code"].stringValue)
-                                
-                                object.title = object.title == "" ? "Namnlös" : object.title
-                                
-                                
-                                try! self.realm.write {
-                                    self.realm.add(object)
-                                }
-                                
-                            }
-
-                            
-                            
-                        }
-                        
-                        
-                        
-                        // Loop over realm projects
-                        for e in 0..<realmProjects.count {
-
-                            let realmProject: ProjectsRealmItem = realmProjects[e]
-                            let serverProject = self.getJsonObjectByPrivateId(serverProjects: [serverProjects], privateID: realmProject.privateID)
-                            
-                            
-                            if (serverProject != JSON.null) {
-                            
-                                // If it does exist on the server
-                                self.updateOldest(realmProject: realmProject, serverProject: serverProject)
-                                
-                            } else {
-                                
-                                // If it does not exist on the serer
-                                
-                                // TODO: UPLOAD TO SERVER
-                                
-                                
-                            }
-                        
+                        try! realm.write {
+                            realm.add(newRealmProject)
                         }
                         
                         
                     }
-        
-            }
-        }
-    }
-    
-    
-    
-    
-    func updateOldest(realmProject: ProjectsRealmItem, serverProject: JSON) {
-    
-        let realmUpdatedInt = Int(realmProject.updated)
-        let serverUpdatedInt = Int(serverProject["updated"].stringValue)
-        
-        
-        
-        // If latest updated on realm
-        if (realmUpdatedInt! > serverUpdatedInt!) {
-        
-            if (Reachability.isConnectedToNetwork()) {
+                    
+                    
+                    
+                    // Open id for project to open
+                    if (!self.sendNothing) {
+                        if self.openPrivateID == responseItem["old_privateID"].string {
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProjectsStarted"), object: self)
+                            self.openPrivateID = responseItem["privateID"].string!
+                        }
+                    }
+                    
+                    
+                    
+                    
+
+                }
                 
-                DispatchQueue.global(qos: .userInitiated).async {
+                
+                
+            }
+            
+            
+            
+            DispatchQueue.main.async {
+
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProjectsStarted"), object: self)
+                
+                
+                if (!self.sendNothing) {
                     
-                    // Save code
-                    Alamofire.request(Vars.URL_EDITOR_SAVE + realmProject.privateID, parameters: ["code": realmProject.code]).response { response in }
+                    let realm = try! Realm()
+                    
+                    try! realm.write {
+                        realm.delete(realm.objects(ProjectsRealmItem.self))
+                    }
+
+                    if self.nav == nil {
+                        _ = ProjectsSync(openPrivateID: self.openPrivateID, sendNothing: true, nav: UINavigationController.init())
+                    } else {
+                        _ = ProjectsSync(openPrivateID: self.openPrivateID, sendNothing: true, nav: self.nav!)
+                    }
                     
                     
-                    // Save meteadata
-                    let parameters = ["title": realmProject.title,
-                                      "description": realmProject.description,
-                                      "author": "",
-                                      "publicOrNot": realmProject.isPublic ? "CHECKED" : ""]
+                } else {
                     
+
                     
-                    Alamofire.request(Vars.URL_PROJECTS_EDIT + realmProject.privateID, parameters: parameters).response { response in }
+                    // Open new project
+                    if self.openPrivateID != "" {
+                        DispatchQueue.main.async() {
+                            let storyboard = UIStoryboard(name: "Editor", bundle: nil)
+                            let vc = storyboard.instantiateViewController(withIdentifier: "editor") as! EditorViewController
+                            vc.privateID = self.openPrivateID
+                            self.nav?.pushViewController(vc, animated: true)
+                        }
+                        
+                    }
+                    
+
                     
                 }
-        
-        }
-            
-            
-        
-        // If latest updated on the server
-        if (serverUpdatedInt! > realmUpdatedInt!) {
-            
-            try! realm.write {
-                realmProject.privateID = serverProject["privateID"].stringValue
-                realmProject.publicID = serverProject["publicID"].stringValue
-                realmProject.title = Base64Helper.decode(encoded: serverProject["title"].stringValue)
-                realmProject.descriptionText = Base64Helper.decode(encoded: serverProject["description"].stringValue)
-                realmProject.updated = serverProject["updated"].stringValue
-                realmProject.code = Base64Helper.decode(encoded: serverProject["code"].stringValue)
-                
-                realmProject.title = realmProject.title == "" ? "Namnlös" : realmProject.title
             }
-        
+            
+           
         }
-        
-    
-        }
-        
+
         
     }
-    
-    
-    
-    
-    
-    
-        
-    
-    func getJsonObjectByPrivateId(serverProjects: Array<JSON>, privateID: String) -> JSON {
-    
-        for i in 0..<serverProjects.count {
-            
-            if serverProjects[i]["privateID"].stringValue == privateID {
-                return serverProjects[i]["privateID"]
-            }
-        
-        }
-        
-        return JSON.null
-        
-    }
-    
     
     
 

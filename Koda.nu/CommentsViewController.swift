@@ -99,10 +99,10 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
                             
                             // Base64
                             let decodedComment = Data(base64Encoded: comment, options: NSData.Base64DecodingOptions(rawValue: 0))
-                            comment = NSString(data: decodedComment!, encoding: String.Encoding.utf8.rawValue) as! String
+                            comment = NSString(data: decodedComment!, encoding: String.Encoding.utf8.rawValue)! as String
                             
                             let decodedAuthor = Data(base64Encoded: author, options: NSData.Base64DecodingOptions(rawValue: 0))
-                            author = NSString(data: decodedAuthor!, encoding: String.Encoding.utf8.rawValue) as! String
+                            author = NSString(data: decodedAuthor!, encoding: String.Encoding.utf8.rawValue)! as String
                             
                             if (author == "") {
                                 author = "Anonym"

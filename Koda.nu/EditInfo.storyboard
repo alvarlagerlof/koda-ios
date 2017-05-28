@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="tQa-xf-ucH">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Redigera info-->
+        <scene sceneID="pBy-WQ-557">
+            <objects>
+                <viewController storyboardIdentifier="EditInfo" autoresizesArchivedViewToFullSize="NO" title="Redigera info" definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" hidesBottomBarWhenPushed="YES" id="tQa-xf-ucH" customClass="EditInfoViewController" customModule="Koda_nu" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="v6G-hS-4MO"/>
+                        <viewControllerLayoutGuide type="bottom" id="dyF-Y3-aNI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="L3I-6R-Wms">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xbw-qP-u0E">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zrz-SE-xZy">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="TITLE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iHd-Yd-tR5">
+                                                <rect key="frame" x="8" y="8" width="359" height="13"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                                <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="de2-T3-HVs">
+                                                <rect key="frame" x="8" y="29" width="359" height="35"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="iHd-Yd-tR5" firstAttribute="leading" secondItem="zrz-SE-xZy" secondAttribute="leading" constant="8" id="5TI-MR-alG"/>
+                                            <constraint firstItem="de2-T3-HVs" firstAttribute="top" secondItem="iHd-Yd-tR5" secondAttribute="bottom" constant="8" id="Ayb-Uv-gLC"/>
+                                            <constraint firstItem="iHd-Yd-tR5" firstAttribute="top" secondItem="zrz-SE-xZy" secondAttribute="top" constant="8" id="FA7-HM-ZOy"/>
+                                            <constraint firstAttribute="trailing" secondItem="de2-T3-HVs" secondAttribute="trailing" constant="8" id="eN3-oI-Zdb"/>
+                                            <constraint firstItem="de2-T3-HVs" firstAttribute="leading" secondItem="zrz-SE-xZy" secondAttribute="leading" constant="8" id="pKx-Wh-y3o"/>
+                                            <constraint firstAttribute="trailing" secondItem="iHd-Yd-tR5" secondAttribute="trailing" constant="8" id="vJg-i2-eta"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="zrz-SE-xZy" firstAttribute="width" secondItem="Xbw-qP-u0E" secondAttribute="width" id="fRv-25-rqf"/>
+                                    <constraint firstItem="zrz-SE-xZy" firstAttribute="height" secondItem="Xbw-qP-u0E" secondAttribute="height" id="zX4-Xz-2kS"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="dyF-Y3-aNI" firstAttribute="top" secondItem="Xbw-qP-u0E" secondAttribute="bottom" id="0n2-R5-dXg"/>
+                            <constraint firstAttribute="trailing" secondItem="Xbw-qP-u0E" secondAttribute="trailing" id="36c-sO-Z2H"/>
+                            <constraint firstItem="Xbw-qP-u0E" firstAttribute="top" secondItem="L3I-6R-Wms" secondAttribute="top" id="KtP-kM-E8z"/>
+                            <constraint firstItem="Xbw-qP-u0E" firstAttribute="leading" secondItem="L3I-6R-Wms" secondAttribute="leading" id="mdf-Ma-x2G"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
+                    <navigationItem key="navigationItem" title="Redigera info" id="fUc-0G-GBp"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vYU-Tg-5s6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="196" y="260.41979010494754"/>
+        </scene>
+    </scenes>
+</document>

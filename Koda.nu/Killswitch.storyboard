@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Killswitch View Controller-->
+        <scene sceneID="b7l-WT-pq3">
+            <objects>
+                <viewController storyboardIdentifier="killswitch" autoresizesArchivedViewToFullSize="NO" definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" hidesBottomBarWhenPushed="YES" id="4Pd-ip-qik" customClass="KillswitchViewController" customModule="Koda_nu" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5QT-l7-sGs"/>
+                        <viewControllerLayoutGuide type="bottom" id="X5C-1c-VzK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Feb-k2-Lyd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Qt-lF-8pR">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dWl-mV-ncE">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="254"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Ett fel!" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Szc-My-Wcj">
+                                                <rect key="frame" x="13" y="56" width="290" height="60"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="290" id="ZRA-hd-lwA"/>
+                                                </constraints>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="0.96805436643835618" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="33"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="Gör så här för att fixa problemet" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="z4K-Oj-Qx2">
+                                                <rect key="frame" x="13" y="165" width="290" height="31"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="290" id="HVy-6t-HOh"/>
+                                                </constraints>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="0.85514768835616439" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="En lååång beskrivning" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="e64-jh-hGw">
+                                                <rect key="frame" x="13" y="124" width="290" height="33"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="290" id="Sp4-Az-bGG"/>
+                                                </constraints>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="0.90076519691780821" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="e64-jh-hGw" firstAttribute="centerX" secondItem="dWl-mV-ncE" secondAttribute="centerX" constant="-2" id="Ilb-IQ-h1L"/>
+                                            <constraint firstItem="e64-jh-hGw" firstAttribute="top" secondItem="Szc-My-Wcj" secondAttribute="bottom" constant="8" id="We4-bF-Nn5"/>
+                                            <constraint firstAttribute="bottom" secondItem="z4K-Oj-Qx2" secondAttribute="bottom" constant="58" id="cFq-en-kUh"/>
+                                            <constraint firstItem="Szc-My-Wcj" firstAttribute="top" secondItem="dWl-mV-ncE" secondAttribute="top" constant="56" id="o5z-Ig-DMD"/>
+                                            <constraint firstItem="z4K-Oj-Qx2" firstAttribute="top" secondItem="e64-jh-hGw" secondAttribute="bottom" constant="8" id="rMz-Es-riP"/>
+                                            <constraint firstItem="e64-jh-hGw" firstAttribute="centerX" secondItem="z4K-Oj-Qx2" secondAttribute="centerX" id="ytH-Lx-59t"/>
+                                            <constraint firstItem="Szc-My-Wcj" firstAttribute="centerX" secondItem="dWl-mV-ncE" secondAttribute="centerX" constant="-2" id="zuS-re-fPA"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="dWl-mV-ncE" secondAttribute="bottom" id="7g2-iE-jxl"/>
+                                    <constraint firstItem="dWl-mV-ncE" firstAttribute="top" secondItem="0Qt-lF-8pR" secondAttribute="top" id="Qfk-Nv-CGo"/>
+                                    <constraint firstItem="dWl-mV-ncE" firstAttribute="leading" secondItem="0Qt-lF-8pR" secondAttribute="leading" id="eaU-b8-Mhx"/>
+                                    <constraint firstItem="dWl-mV-ncE" firstAttribute="width" secondItem="0Qt-lF-8pR" secondAttribute="width" id="kUb-Vs-stN"/>
+                                    <constraint firstAttribute="trailing" secondItem="dWl-mV-ncE" secondAttribute="trailing" id="vjD-kE-bQH"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="0Qt-lF-8pR" firstAttribute="leading" secondItem="Feb-k2-Lyd" secondAttribute="leading" id="Pnr-BI-7b2"/>
+                            <constraint firstAttribute="trailing" secondItem="0Qt-lF-8pR" secondAttribute="trailing" id="b9E-WS-gTH"/>
+                            <constraint firstItem="X5C-1c-VzK" firstAttribute="top" secondItem="0Qt-lF-8pR" secondAttribute="bottom" id="nxX-e0-YQI"/>
+                            <constraint firstItem="0Qt-lF-8pR" firstAttribute="top" secondItem="Feb-k2-Lyd" secondAttribute="top" id="sbp-Hs-9YC"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="actionTextView" destination="z4K-Oj-Qx2" id="0zt-DC-eiI"/>
+                        <outlet property="backgroundVIew" destination="dWl-mV-ncE" id="Vfj-Qt-X45"/>
+                        <outlet property="descriptionTextView" destination="e64-jh-hGw" id="7vO-GK-ccO"/>
+                        <outlet property="titleTextVIew" destination="Szc-My-Wcj" id="rKB-kj-whr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Omv-5Y-bzK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-45" y="105"/>
+        </scene>
+    </scenes>
+</document>

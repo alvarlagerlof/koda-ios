@@ -14,8 +14,10 @@ class ProjectsRealmItem: Object {
     dynamic var publicID = ""
     dynamic var title = ""
     dynamic var descriptionText = ""
-    dynamic var updated = ""
+    dynamic var updatedRealm = ""
+    dynamic var updatedServer = ""
     dynamic var code = ""
     dynamic var isPublic = false
+    dynamic var isSynced = false
     
 }

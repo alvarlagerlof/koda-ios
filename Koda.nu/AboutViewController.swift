@@ -6,15 +6,22 @@
 //  Copyright © 2016 Alvar Lagerlöf. All rights reserved.
 //
 import UIKit
+import Firebase
 
 class AboutController: UIViewController {
     
     @IBOutlet weak var versionTextView: UILabel!
-    @IBOutlet weak var descriptionTextView: UILabel!
+    @IBOutlet weak var descriptionTextView: UITextView!
     
+    @IBOutlet weak var scrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Analytics.logEvent("settings_about_open", parameters: [:])
+
+        
+        scrollView.contentSize = CGSize(width: self.view.frame.size.width, height: descriptionTextView.frame.size.height)
         
      
         // Version text view
@@ -25,7 +32,6 @@ class AboutController: UIViewController {
         
         
         // Long description
-        descriptionTextView.numberOfLines = 0
         descriptionTextView.sizeToFit()
         
     }

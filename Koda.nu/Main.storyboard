@@ -23,7 +23,6 @@
                     <connections>
                         <segue destination="jpD-8f-kWB" kind="relationship" relationship="viewControllers" id="yQh-6B-4AP"/>
                         <segue destination="NED-Ye-Wuh" kind="relationship" relationship="viewControllers" id="2Bq-Dw-Yds"/>
-                        <segue destination="Xu0-VR-9YZ" kind="relationship" relationship="viewControllers" id="naQ-xH-pms"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dBk-Gu-Gnl" sceneMemberID="firstResponder"/>
@@ -116,39 +115,10 @@
             </objects>
             <point key="canvasLocation" x="1209" y="1604"/>
         </scene>
-        <!--Settings-->
-        <scene sceneID="Oaw-Ww-Tuc">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Settings" id="XPN-iA-k60" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="JJw-cW-nNr"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Opu-EE-TwW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1209.5" y="2307"/>
-        </scene>
-        <!--Inställningar-->
-        <scene sceneID="zoW-mv-ApH">
-            <objects>
-                <navigationController title="Inställningar" id="Xu0-VR-9YZ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Inställningar" image="5settings" selectedImage="5settings-highlighted" id="hLn-hp-Izc"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="o9b-O5-94A">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="XPN-iA-k60" kind="relationship" relationship="rootViewController" id="8hc-Dd-FqM"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IkC-PE-dPN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="730" y="2307"/>
-        </scene>
     </scenes>
     <resources>
         <image name="1myProjects" width="25" height="25"/>
         <image name="1myProjects-highlighted" width="25" height="25"/>
         <image name="2api" width="25" height="25"/>
-        <image name="5settings" width="25" height="25"/>
-        <image name="5settings-highlighted" width="25" height="25"/>
     </resources>
 </document>

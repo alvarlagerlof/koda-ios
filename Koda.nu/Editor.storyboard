@@ -6,14 +6,13 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Editor View Controller-->
+        <!--Editor-->
         <scene sceneID="wtj-Vu-9AQ">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="mhV-av-xNQ" customClass="EditorViewController" customModule="Koda_nu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="editor" hidesBottomBarWhenPushed="YES" id="mhV-av-xNQ" customClass="EditorViewController" customModule="Koda_nu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KBq-wk-Rhn"/>
                         <viewControllerLayoutGuide type="bottom" id="hM0-kL-YCK"/>
@@ -22,28 +21,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sKr-p9-SgX">
-                                <rect key="frame" x="0.0" y="39" width="600" height="512"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <string key="text">&lt;script src="http://koda.nu/simple.js"&gt;
-
-  circle(100, 100, 20, "red");
-
-&lt;/script&gt;</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert"/>
-                            </textView>
-                            <webView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G3h-20-5c8">
-                                <rect key="frame" x="0.0" y="108" width="600" height="492"/>
-                                <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </webView>
-                            <navigationBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gqh-S1-Slm">
-                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gqh-S1-Slm">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
                                 <items>
                                     <navigationItem id="6Ig-Kc-9QL">
                                         <nil key="title"/>
                                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="MzS-47-UaB">
-                                            <rect key="frame" x="180" y="7.5" width="240" height="29"/>
+                                            <rect key="frame" x="67.5" y="7" width="240" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Redigera"/>
@@ -56,45 +40,62 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G3h-20-5c8">
+                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
+                                <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9xM-br-jOs">
+                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sKr-p9-SgX">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <string key="text">&lt;script src="http://koda.nu/simple.js"&gt;
+
+  circle(100, 100, 20, "red");
+
+&lt;/script&gt;</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert"/>
+                                    </textView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="sKr-p9-SgX" firstAttribute="top" secondItem="9xM-br-jOs" secondAttribute="top" id="8hZ-wV-V2t"/>
+                                    <constraint firstItem="sKr-p9-SgX" firstAttribute="centerY" secondItem="9xM-br-jOs" secondAttribute="centerY" id="JkB-BE-AQb"/>
+                                    <constraint firstItem="sKr-p9-SgX" firstAttribute="centerX" secondItem="9xM-br-jOs" secondAttribute="centerX" id="cNU-UC-msp"/>
+                                    <constraint firstAttribute="bottom" secondItem="sKr-p9-SgX" secondAttribute="bottom" id="mDR-g1-lwC"/>
+                                    <constraint firstItem="sKr-p9-SgX" firstAttribute="leading" secondItem="9xM-br-jOs" secondAttribute="leading" id="sWW-xu-IPa"/>
+                                    <constraint firstAttribute="trailing" secondItem="sKr-p9-SgX" secondAttribute="trailing" id="tKC-kK-VQN"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="sKr-p9-SgX" firstAttribute="top" secondItem="PgV-i5-MAz" secondAttribute="topMargin" constant="39" id="0lz-tz-DB2"/>
-                            <constraint firstItem="Gqh-S1-Slm" firstAttribute="leading" secondItem="PgV-i5-MAz" secondAttribute="leadingMargin" constant="-20" id="Buc-cn-NQw"/>
+                            <constraint firstItem="9xM-br-jOs" firstAttribute="leading" secondItem="PgV-i5-MAz" secondAttribute="leading" id="5DW-43-mtf"/>
+                            <constraint firstItem="Gqh-S1-Slm" firstAttribute="top" secondItem="KBq-wk-Rhn" secondAttribute="bottom" id="7I6-aS-5gc"/>
                             <constraint firstAttribute="bottom" secondItem="G3h-20-5c8" secondAttribute="bottom" id="F4Y-O4-7av"/>
-                            <constraint firstItem="Gqh-S1-Slm" firstAttribute="top" secondItem="KBq-wk-Rhn" secondAttribute="bottom" id="JnO-RB-f2a"/>
-                            <constraint firstItem="sKr-p9-SgX" firstAttribute="top" secondItem="KBq-wk-Rhn" secondAttribute="bottom" constant="-64" id="PxR-6F-fhy"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Gqh-S1-Slm" secondAttribute="trailing" constant="-20" id="Sg9-26-Zph"/>
-                            <constraint firstAttribute="trailing" secondItem="sKr-p9-SgX" secondAttribute="trailing" id="TGt-L1-7Pa"/>
-                            <constraint firstItem="sKr-p9-SgX" firstAttribute="bottom" secondItem="hM0-kL-YCK" secondAttribute="top" id="TxX-DK-NQU"/>
-                            <constraint firstItem="G3h-20-5c8" firstAttribute="leading" secondItem="sKr-p9-SgX" secondAttribute="leading" id="WCt-Qb-ZxG"/>
-                            <constraint firstItem="G3h-20-5c8" firstAttribute="top" secondItem="Gqh-S1-Slm" secondAttribute="bottom" id="WxE-Xn-s8u"/>
-                            <constraint firstItem="G3h-20-5c8" firstAttribute="trailing" secondItem="sKr-p9-SgX" secondAttribute="trailing" id="bzc-zY-Ls4"/>
-                            <constraint firstItem="hM0-kL-YCK" firstAttribute="top" secondItem="Gqh-S1-Slm" secondAttribute="bottom" id="c8f-jz-meA"/>
-                            <constraint firstItem="G3h-20-5c8" firstAttribute="top" secondItem="sKr-p9-SgX" secondAttribute="top" constant="64" id="cbl-Ro-S6d"/>
-                            <constraint firstItem="sKr-p9-SgX" firstAttribute="leading" secondItem="PgV-i5-MAz" secondAttribute="leading" id="wlz-gG-tyd"/>
-                            <constraint firstItem="Gqh-S1-Slm" firstAttribute="top" secondItem="KBq-wk-Rhn" secondAttribute="bottom" id="xpW-57-xy5"/>
+                            <constraint firstItem="9xM-br-jOs" firstAttribute="leading" secondItem="G3h-20-5c8" secondAttribute="leading" id="Hm3-gP-oOd"/>
+                            <constraint firstItem="hM0-kL-YCK" firstAttribute="top" secondItem="9xM-br-jOs" secondAttribute="bottom" id="Imh-BN-T9o"/>
+                            <constraint firstItem="Gqh-S1-Slm" firstAttribute="bottom" secondItem="G3h-20-5c8" secondAttribute="top" id="Kdt-gs-HVH"/>
+                            <constraint firstAttribute="trailing" secondItem="9xM-br-jOs" secondAttribute="trailing" id="PfD-7M-2Cm"/>
+                            <constraint firstItem="Gqh-S1-Slm" firstAttribute="leading" secondItem="G3h-20-5c8" secondAttribute="leading" id="chu-aa-8O5"/>
+                            <constraint firstItem="9xM-br-jOs" firstAttribute="top" secondItem="Gqh-S1-Slm" secondAttribute="bottom" id="f41-xO-ewR"/>
+                            <constraint firstItem="9xM-br-jOs" firstAttribute="trailing" secondItem="G3h-20-5c8" secondAttribute="trailing" id="nNO-Cp-Vsb"/>
+                            <constraint firstItem="Gqh-S1-Slm" firstAttribute="trailing" secondItem="G3h-20-5c8" secondAttribute="trailing" id="o4K-hv-l5Y"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="PxR-6F-fhy"/>
-                                <exclude reference="JnO-RB-f2a"/>
-                                <exclude reference="cbl-Ro-S6d"/>
-                                <exclude reference="c8f-jz-meA"/>
-                            </mask>
-                        </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="uhv-ck-AgF"/>
+                    <navigationItem key="navigationItem" title="Editor" id="uhv-ck-AgF"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="gameWebView" destination="G3h-20-5c8" id="eGM-KR-QxA"/>
+                        <outlet property="scrollView" destination="9xM-br-jOs" id="DIp-cE-LU2"/>
                         <outlet property="segmentedControl" destination="MzS-47-UaB" id="k11-3s-b97"/>
-                        <outlet property="textEditor" destination="sKr-p9-SgX" id="8dA-4j-gUB"/>
+                        <outlet property="textEditor" destination="sKr-p9-SgX" id="D8V-Ug-NvM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sCP-Sl-qC4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2157" y="-640"/>
+            <point key="canvasLocation" x="2156" y="-640.02998500749629"/>
         </scene>
     </scenes>
 </document>

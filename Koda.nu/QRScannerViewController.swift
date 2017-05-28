@@ -8,6 +8,8 @@
 
 import UIKit
 import AVFoundation
+import SwiftyJSON
+import Firebase
 
 class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
@@ -19,13 +21,16 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
     @IBOutlet weak var lblQRCodeResult: UILabel!
     
     
-    var urlString: String = ""
+    var jsonString: String = ""
     
     var hasFoundCode = false
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Analytics.logEvent("qr_scan_open", parameters: [:])
+
         
         self.title = "Skanna QR kod"
         
@@ -47,7 +52,7 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
             objCaptureDeviceInput = nil
         }
         if (error != nil) {
-            let alertView:UIAlertView = UIAlertView(title: "Device Error", message:"Device not Supported for this Application", delegate: nil, cancelButtonTitle: "Ok Done")
+            let alertView: UIAlertView = UIAlertView(title: "Device Error", message:"Device not Supported for this Application", delegate: nil, cancelButtonTitle: "Ok Done")
             alertView.show()
             return
         }
@@ -81,15 +86,43 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
             let objBarCode = objCaptureVideoPreviewLayer?.transformedMetadataObject(for: objMetadataMachineReadableCodeObject as AVMetadataMachineReadableCodeObject) as! AVMetadataMachineReadableCodeObject
             vwQRCode?.frame = objBarCode.bounds;
             if objMetadataMachineReadableCodeObject.stringValue != nil {
-                lblQRCodeResult.text = objMetadataMachineReadableCodeObject.stringValue
-                urlString = objMetadataMachineReadableCodeObject.stringValue
+                lblQRCodeResult.text = "Hittade QR-kod"
+                jsonString = objMetadataMachineReadableCodeObject.stringValue
                 
                 
                 
                 if (hasFoundCode == false) {
                     hasFoundCode = true
-                    self.performSegue(withIdentifier: "playFromScan", sender: self)
                     
+                    
+                    // String to json objec
+                    var json = JSON(data: jsonString.data(using: String.Encoding.utf8)!, options: JSONSerialization.ReadingOptions.mutableContainers, error: nil)
+                                        
+                    
+                    // Get Storyboard and ViewController
+                    let storyboard = UIStoryboard(name: "Play", bundle: nil)
+                    let vc = storyboard.instantiateViewController(withIdentifier: "play") as! PlayViewController
+                    
+                    
+                    
+                    
+                    // Check data
+                    if let title = json["title"].string { vc.recivedTitle = Base64Helper.decode(encoded: title) }
+                    
+                    
+                    if let url = json["url"].string { vc.recivedUrl = Base64Helper.decode(encoded: url) }
+    
+                    if let author = json["author"].string { vc.recivedAuthor = Base64Helper.decode(encoded: author) }
+                    
+                    
+                    
+                    // Push
+                    if vc.recivedUrl != "" {
+                        Analytics.logEvent("qr_scan_successful", parameters: [:])
+                        navigationController?.pushViewController(vc, animated: true)
+                    }
+                    
+                                        
                 }
                 
             }
@@ -97,17 +130,8 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
     }
     
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "playFromScan") {
-            let yourNextViewController = (segue.destination as! PlayViewController)
-            
-            yourNextViewController.recivedTitle = "Spela"
-            yourNextViewController.recivedUrl = urlString
-            
-            
-        }
-        
-    }
+
+    
 
     override func viewDidAppear(_ animated: Bool) {
         hasFoundCode = false

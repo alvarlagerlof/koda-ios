@@ -10,8 +10,14 @@ import Foundation
 
 struct ApiItem {
     
-    var type: String
+    var type: type
     var command: String
     var description: String
+    
+    
+    enum type {
+        case normal
+        case offline
+    }
     
 }

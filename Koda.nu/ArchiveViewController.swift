@@ -94,13 +94,13 @@ class ArchiveViewController: UIViewController, UITableViewDelegate, UISearchResu
                         
                         // Base64
                         let decodedTitle = Data(base64Encoded: title, options: NSData.Base64DecodingOptions(rawValue: 0))
-                        title = NSString(data: decodedTitle!, encoding: String.Encoding.utf8.rawValue) as! String
+                        title = NSString(data: decodedTitle!, encoding: String.Encoding.utf8.rawValue)! as String
                         
                         let decodedAuthor = Data(base64Encoded: author, options: NSData.Base64DecodingOptions(rawValue: 0))
-                        author = NSString(data: decodedAuthor!, encoding: String.Encoding.utf8.rawValue) as! String
+                        author = NSString(data: decodedAuthor!, encoding: String.Encoding.utf8.rawValue)! as String
                         
                         let decodedDescription = Data(base64Encoded: description, options: NSData.Base64DecodingOptions(rawValue: 0))
-                        description = NSString(data: decodedDescription!, encoding: String.Encoding.utf8.rawValue) as! String
+                        description = NSString(data: decodedDescription!, encoding: String.Encoding.utf8.rawValue)! as String
                         
                         
                         // If null value
@@ -182,7 +182,7 @@ class ArchiveViewController: UIViewController, UITableViewDelegate, UISearchResu
     
     
     // Set contents
-    func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
+    private func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
         
         var cell: UITableViewCell
         
@@ -317,7 +317,7 @@ class ArchiveViewController: UIViewController, UITableViewDelegate, UISearchResu
                 
                 let url = URL(string: (listArrayFiltered[(indexPath?.row)!].liked ? Vars.URL_LIKE : Vars.URL_DISSLIKE) + listArrayFiltered[(indexPath?.row)!].publicID)
                 let parameters = ["headless": "headless"]
-                Alamofire.request(url!, parameters: parameters)
+                _ = Alamofire.request(url!, parameters: parameters)
             }
             
             
@@ -338,7 +338,7 @@ class ArchiveViewController: UIViewController, UITableViewDelegate, UISearchResu
             
                 let url = URL(string: (listArray[(indexPath?.row)!].liked ? Vars.URL_LIKE : Vars.URL_DISSLIKE) + listArray[(indexPath?.row)!].publicID)
                 let parameters = ["headless": "headless"]
-                Alamofire.request(url!, parameters: parameters)
+                _ = Alamofire.request(url!, parameters: parameters)
             }
             
         }

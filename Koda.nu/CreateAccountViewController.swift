@@ -10,6 +10,9 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Kingfisher
+import RealmSwift
+import SwiftOverlays
+import Firebase
 
 class CreateAccountViewController: UIViewController {
     
@@ -21,6 +24,9 @@ class CreateAccountViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Analytics.logEvent("login_create_open", parameters: [:])
+
         
         setUpTextField(emailTextField)
         setUpButton(nextButton)
@@ -60,10 +66,16 @@ class CreateAccountViewController: UIViewController {
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
         
+        Analytics.logEvent("login_create_button_pressed", parameters: [:])
+
+        
         if !Reachability.isConnectedToNetwork() {
             let alert = UIAlertController(title: "Ingen ansluting", message: "Gå in på inställingar och se till att WiFi eller mobildata är på", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
+            
+            Analytics.logEvent("login_create_failed", parameters: [:])
+
             
         } else {
             let url = Vars.URL_LOGIN_CREATE
@@ -74,8 +86,11 @@ class CreateAccountViewController: UIViewController {
                 "headless": "thisisheadless"
             ]
             
-            Alamofire.request(URL(string: url)!, parameters: parameters)
+            self.showWaitOverlay()
+            
+            Alamofire.request(URL(string: url)!, method: .post, parameters: parameters)
                 .responseString { response in
+                    
                     
                     let json = JSON(data: response.result.value!.data(using: String.Encoding.utf8)!, options: JSONSerialization.ReadingOptions.mutableContainers, error: nil)
                     
@@ -83,9 +98,13 @@ class CreateAccountViewController: UIViewController {
                     var failed = false
                     
                     if (json["error"].exists()) {
+                        Analytics.logEvent("login_create_failed", parameters: [:])
+
                         message = json["error"].stringValue
                         failed = true
                     } else {
+                        Analytics.logEvent("login_create_successful", parameters: [:])
+
                         message = "E-mail: " + json["username"].stringValue + "\nLösenord: " + json["password"].stringValue
                         
                         UserDefaults.standard.set(json["username"].stringValue, forKey: Vars.USERDEFAULT_EMAIL)
@@ -95,10 +114,18 @@ class CreateAccountViewController: UIViewController {
                     
                     
                     // Alert
-                    let alert = UIAlertController(title: "Dina kontouppgifter", message: message, preferredStyle: UIAlertControllerStyle.alert)
+                    let alert = UIAlertController(title: failed ? "Ops!" : "Dina kontouppgifter", message: message, preferredStyle: UIAlertControllerStyle.alert)
                     
                     let okActionClose = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
                         UIAlertAction in
+                        let realm = try! Realm()
+
+                        try! realm.write {
+                            realm.deleteAll()
+                        }
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProjectsDone"), object: self)
+                        _ = ProjectsSync()
+
                         self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
                     }
                     
@@ -113,7 +140,9 @@ class CreateAccountViewController: UIViewController {
                         alert.addAction(okAction)
                     }
                     
-                    
+               
+                    self.removeAllOverlays()
+
                     self.present(alert, animated: true, completion: nil)
             }
         }

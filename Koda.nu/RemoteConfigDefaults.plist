@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>killswitch_on</key>
+	<false/>
+	<key>killswitch_action</key>
+	<string>Pröva att starta appen igen om en stund.</string>
+	<key>killswitch_description</key>
+	<string>Appen kunde inte prata med servern.</string>
+	<key>killswitch_title</key>
+	<string>Tjänsten nere</string>
+	<key>url_login_image</key>
+	<string>https://unsplash.com/photos/OqtafYT5kTw/download?force=true</string>
+	<key>url_login_forgot_image</key>
+	<string>https://unsplash.com/photos/6njoEbtarec/download?force=true</string>
+	<key>url_login_new_image</key>
+	<string>https://unsplash.com/photos/XJXWbfSo2f0/download?force=true</string>
+	<key>base_url</key>
+	<string>https://koda.nu/</string>
+	<key>api_version</key>
+	<string>api_v1/</string>
+	<key>url_projects_delete</key>
+	<string>delete/</string>
+	<key>url_sync</key>
+	<string>synkronisera</string>
+	<key>url_api_2d</key>
+	<string>api_2d</string>
+	<key>url_api_3d</key>
+	<string>api_3d</string>
+	<key>url_guides</key>
+	<string>https://ravla.org/guider.json</string>
+	<key>url_archive</key>
+	<string>arkivet</string>
+	<key>pref_nick</key>
+	<string>nick</string>
+	<key>pref_email</key>
+	<string>email</string>
+	<key>pref_notifications</key>
+	<string>notifications</string>
+	<key>pref_password</key>
+	<string>password</string>
+	<key>url_comments</key>
+	<string>kommentera/</string>
+	<key>url_comments_send</key>
+	<string>kommentera/</string>
+	<key>url_profile</key>
+	<string>https://ravla.org/profile.txt</string>
+	<key>url_like</key>
+	<string>plus/</string>
+	<key>url_disslike</key>
+	<string>minus/</string>
+	<key>url_login</key>
+	<string>login</string>
+	<key>url_login_forgot</key>
+	<string>login</string>
+	<key>url_login_new</key>
+	<string>login</string>
+	<key>url_logout</key>
+	<string>logout</string>
+	<key>url_login_status</key>
+	<string>status</string>
+	<key>url_settings_save_nick</key>
+	<string>labbet</string>
+</dict>
+</plist>

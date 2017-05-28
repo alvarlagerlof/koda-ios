@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6VW-xy-JWn">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6VW-xy-JWn">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +13,7 @@
         <!--Play-->
         <scene sceneID="ihl-Hw-3gB">
             <objects>
-                <viewController title="Play" hidesBottomBarWhenPushed="YES" id="6VW-xy-JWn" customClass="PlayViewController" customModule="Koda_nu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="play" title="Play" hidesBottomBarWhenPushed="YES" id="6VW-xy-JWn" customClass="PlayViewController" customModule="Koda_nu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="c7i-Gz-r9m"/>
                         <viewControllerLayoutGuide type="bottom" id="srw-H3-0NC"/>
@@ -22,15 +22,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YbN-Lu-0Ew">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <webView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YbN-Lu-0Ew">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="delegate" destination="6VW-xy-JWn" id="Dls-yg-Hu7"/>
                                 </connections>
                             </webView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="jWA-98-zgd">
-                                <rect key="frame" x="282" y="281" width="37" height="37"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="jWA-98-zgd">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
                                 <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
                         </subviews>
@@ -46,8 +46,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="Wgo-3a-IrG">
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="action" id="zW9-cZ-Lyl"/>
-                            <barButtonItem title="Item" style="done" systemItem="refresh" id="qdg-qR-lEy">
+                            <barButtonItem systemItem="action" id="zW9-cZ-Lyl">
+                                <connections>
+                                    <action selector="share:" destination="6VW-xy-JWn" id="8To-bB-uhW"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="reload" style="done" id="qdg-qR-lEy">
                                 <connections>
                                     <action selector="refresh:" destination="6VW-xy-JWn" id="EsI-uU-LV1"/>
                                 </connections>
@@ -62,7 +66,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VCJ-O5-gNn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2813" y="1123"/>
+            <point key="canvasLocation" x="2812" y="1122.1889055472266"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="reload" width="25" height="25"/>
+    </resources>
 </document>

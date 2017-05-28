@@ -8,6 +8,8 @@
 
 import UIKit
 import Alamofire
+import RealmSwift
+import Firebase
 
 class SettingsViewController: UITableViewController {
     
@@ -28,17 +30,13 @@ class SettingsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let fristStartBool = prefs.bool(forKey: Vars.USERDEFAULT_FIRST_START)
+        Analytics.logEvent("settings_open", parameters: [:])
+
         
-        if (!fristStartBool) {
-            prefs.set(true, forKey: Vars.USERDEFAULT_FIRST_START)
+        /*
+        // If notifications not set
+        if isKeyPresentInUserDefaults(key: Vars.USERDEFAULT_NOTIFICATIONS) {
             prefs.set(true, forKey: Vars.USERDEFAULT_NOTIFICATIONS)
-        }
-        
-        
-        // Set nickname
-        if let nick = prefs.string(forKey: Vars.USERDEFAULT_NICK_NAME) {
-            nickNameTextField.text = nick
         }
         
         
@@ -46,7 +44,13 @@ class SettingsViewController: UITableViewController {
         if (!prefs.bool(forKey: Vars.USERDEFAULT_NOTIFICATIONS)) {
             notificationsSwitch.setOn(false, animated: false)
         }
+        */
         
+        // Set nickname
+        if let nick = prefs.string(forKey: Vars.USERDEFAULT_NICK_NAME) {
+            nickNameTextField.text = nick
+        }
+
         
         // Tap to dismiss keyboard
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SettingsViewController.dismissKeyboard))
@@ -116,13 +120,44 @@ class SettingsViewController: UITableViewController {
     
     // Log out
     @IBAction func logOut(_ sender: AnyObject) {
-        for cookie in HTTPCookieStorage.shared.cookies! {
-            HTTPCookieStorage.shared.deleteCookie(cookie)
-        }
-        UserDefaults.standard.synchronize()
-        URLCache.shared.removeAllCachedResponses()
         
-        self.performSegue(withIdentifier: "showLogin", sender: self)
+        UserDefaults.standard.set("", forKey: Vars.USERDEFAULT_EMAIL)
+        UserDefaults.standard.set("", forKey: Vars.USERDEFAULT_PASSWORD)
+        
+        if Reachability.isConnectedToNetwork() {
+            Alamofire.request(Vars.URL_LOGOUT).responseString { response in
+                
+                
+                if response.result.isSuccess {
+                    
+                    let realm = try! Realm()
+                    try! realm.write {
+                        realm.deleteAll()
+                    }
+                    let storyboard = UIStoryboard(name: "Login", bundle: nil)
+                    let controller = storyboard.instantiateViewController(withIdentifier: "login")
+                    controller.hidesBottomBarWhenPushed = false
+                    ViewHelper().getRoot().present(controller, animated: true, completion: nil)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+                        self.navigationController?.tabBarController?.selectedIndex = 0
+                        self.navigationController?.popViewController(animated: true)
+                    })
+                    
+                } else {
+                    let alert = UIAlertController(title: "Ops!", message: "Något gick fel", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+        
+        } else {
+            let alert = UIAlertController(title: "Ops!", message: "Ingen internet-anslutning", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+
+        }
+        
+        
     }
     
     
@@ -156,6 +191,18 @@ class SettingsViewController: UITableViewController {
                 //print(response.result.value ?? "No response")
         }
 
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    func isKeyPresentInUserDefaults(key: String) -> Bool {
+        return UserDefaults.standard.object(forKey: key) != nil
     }
     
     
