@@ -38,7 +38,10 @@ public class ProjectsMoreActionSheet {
             let message = "Kolla in " + (project?.title)! + " på Koda.nu! http://koda.nu/arkivet/" + (project?.publicID)!
             
             let vc = UIActivityViewController(activityItems: [message], applicationActivities: nil)
-            ViewHelper().getRoot().present(vc, animated: true, completion: nil)
+            vc.popoverPresentationController?.sourceView = sender.imageView
+            vc.popoverPresentationController?.sourceRect = sender.bounds
+            
+            nav.present(vc, animated: true, completion: nil)
             
         }))
         

@@ -342,6 +342,16 @@
 			name = Chromatism;
 			sourceTree = "<group>";
 		};
+		1BCF708F1EEA005400578B32 /* Remote config */ = {
+			isa = PBXGroup;
+			children = (
+				1B8A87A71E9538E400146C20 /* RemoteConfigSync.swift */,
+				1B8A87A91E953C6C00146C20 /* FRCG.swift */,
+				1B8A87A51E95330500146C20 /* RemoteConfigDefaults.plist */,
+			);
+			name = "Remote config";
+			sourceTree = "<group>";
+		};
 		23824B5533C97AFF14EE6014 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -449,19 +459,17 @@
 				244247FC1D7A21D700AB91E5 /* QR */,
 				2404B0BC1DAEB80900D028D2 /* Play */,
 				1B68D1711ED9BCBF00F1B98F /* Killswitch */,
-				244D58C91DD0DDCE00DFAAFB /* Vars.swift */,
+				1BCF708F1EEA005400578B32 /* Remote config */,
 				1BE4FF321E5253DC00515395 /* Base64Helper.swift */,
 				2406B9CB1DDD9D2100D94AF1 /* Reachability.swift */,
+				244D58C91DD0DDCE00DFAAFB /* Vars.swift */,
 				1B8A87AF1E95617400146C20 /* DateHelper.swift */,
 				1B8A87AD1E95553A00146C20 /* ViewHelper.swift */,
-				1B8A87A71E9538E400146C20 /* RemoteConfigSync.swift */,
-				1B8A87A91E953C6C00146C20 /* FRCG.swift */,
 				24548BDE1D5F68C10034209E /* Assets.xcassets */,
 				2404B0B81DAEB4FE00D028D2 /* Main.storyboard */,
 				24548BE01D5F68C10034209E /* LaunchScreen.storyboard */,
 				24548BE31D5F68C10034209E /* Info.plist */,
 				1BFBDF841E4CF53E00743B22 /* GoogleService-Info.plist */,
-				1B8A87A51E95330500146C20 /* RemoteConfigDefaults.plist */,
 				24A3E6601D5F6B2A00E268E4 /* Podfile */,
 			);
 			path = Koda.nu;

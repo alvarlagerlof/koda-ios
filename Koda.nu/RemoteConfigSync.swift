@@ -45,7 +45,6 @@ public class RemoteConfigSync {
                 
                 self.showKillswitch(didNotFetch: true)
                 
-                
             }
         }
     }

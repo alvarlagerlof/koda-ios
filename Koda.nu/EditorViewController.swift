@@ -109,7 +109,24 @@ class EditorViewController: UIViewController {
         gameWebView.scrollView.isScrollEnabled = false
 
 
-        // Save in realm
+        saveToRealm()
+        
+        
+        
+    }
+    
+    
+    func reload(_ sender: UIBarButtonItem) {
+        gameWebView.goBack()
+        gameWebView.loadHTMLString(textEditor.text, baseURL: nil)
+        Analytics.logEvent("projects_edit_reload", parameters: [:])
+
+    }
+    
+    
+    
+    
+    func saveToRealm() {
         let realm = try! Realm()
         let object = realm.objects(ProjectsRealmItem.self).filter("privateID = '\(privateID)'").first
         
@@ -124,24 +141,16 @@ class EditorViewController: UIViewController {
             _ = ProjectsSync()
             
         }
-        
-        
-        
     }
     
     
     
     
-    func reload(_ sender: UIBarButtonItem) {
-        gameWebView.goBack()
-        gameWebView.loadHTMLString(textEditor.text, baseURL: nil)
-        Analytics.logEvent("projects_edit_reload", parameters: [:])
-
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        saveToRealm()
     }
-    
-    
-    
-    
     
     
     

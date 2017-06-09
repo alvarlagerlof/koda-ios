@@ -30,7 +30,7 @@ class KillswitchViewController: UIViewController {
             
         } else {
             titleTextVIew.text = "Tjänsten nere."
-            descriptionTextView.text = "Appen kunde inte prata med servern."
+            descriptionTextView.text = "Koda.nu lyckades inte nå servern."
             actionTextView.text = "Pröva att starta appen igen om en stund."
         }
         

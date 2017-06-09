@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="pie-sS-0fS">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_5" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -19,28 +19,27 @@
                         <viewControllerLayoutGuide type="bottom" id="Erd-Cc-X93"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="beq-kk-P1W">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" alpha="0.20000000298023224" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YVZ-4z-Aen">
-                                <rect key="frame" x="-4" y="0.0" width="383" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vd6-sh-bBg">
-                                <rect key="frame" x="-4" y="0.0" width="383" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dYn-2y-VJG">
-                                        <rect key="frame" x="0.0" y="15" width="50" height="50"/>
+                                        <rect key="frame" x="16" y="16" width="53" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="PkS-Aq-8F2"/>
                                             <constraint firstAttribute="height" constant="50" id="Vob-Cb-NKu"/>
                                         </constraints>
-                                        <state key="normal" image="close"/>
+                                        <state key="normal" title="Avbryt"/>
                                         <connections>
                                             <action selector="closeButtonPressed:" destination="pie-sS-0fS" eventType="touchUpInside" id="6or-Yi-Bft"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oan-th-Psf">
-                                        <rect key="frame" x="16" y="248" width="351" height="40"/>
+                                        <rect key="frame" x="218" y="171.66666666666666" width="300" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="4rj-Vn-MnO"/>
                                             <constraint firstAttribute="width" constant="584" id="kLL-A8-cag"/>
@@ -59,9 +58,15 @@
                                         </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3GO-jb-Imo">
-                                        <rect key="frame" x="16" y="200" width="351" height="40"/>
+                                        <rect key="frame" x="218" y="115.66666666666666" width="300" height="39.999999999999972"/>
                                         <constraints>
+                                            <constraint firstAttribute="width" constant="62" id="YQO-dP-rjZ">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="400"/>
+                                            </constraint>
                                             <constraint firstAttribute="height" constant="40" id="fAV-xx-2Gn"/>
+                                            <constraint firstAttribute="width" constant="62" id="pO7-sT-3dH">
+                                                <variation key="heightClass=compact" constant="300"/>
+                                            </constraint>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
@@ -70,9 +75,25 @@
                                                 <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="YQO-dP-rjZ"/>
+                                                <exclude reference="pO7-sT-3dH"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="pO7-sT-3dH"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <mask key="constraints">
+                                                <include reference="YQO-dP-rjZ"/>
+                                            </mask>
+                                        </variation>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skapa konto" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GxH-Sb-eUb">
-                                        <rect key="frame" x="84" y="69" width="214" height="65"/>
+                                        <rect key="frame" x="260.66666666666669" y="50.000000000000007" width="214" height="45.666666666666679"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -80,30 +101,94 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="dYn-2y-VJG" firstAttribute="top" secondItem="Vd6-sh-bBg" secondAttribute="top" constant="15" id="4vk-gn-2iJ"/>
+                                    <constraint firstItem="dYn-2y-VJG" firstAttribute="top" secondItem="Vd6-sh-bBg" secondAttribute="top" constant="16" id="4vk-gn-2iJ"/>
+                                    <constraint firstItem="Oan-th-Psf" firstAttribute="centerX" secondItem="Vd6-sh-bBg" secondAttribute="centerX" id="6jr-JZ-Jqj"/>
                                     <constraint firstItem="Oan-th-Psf" firstAttribute="leading" secondItem="Vd6-sh-bBg" secondAttribute="leading" constant="16" id="7f3-YR-auo"/>
                                     <constraint firstAttribute="trailing" secondItem="Oan-th-Psf" secondAttribute="trailing" constant="16" id="CfN-mZ-a6d"/>
-                                    <constraint firstItem="dYn-2y-VJG" firstAttribute="leading" secondItem="Vd6-sh-bBg" secondAttribute="leading" id="I1b-0x-06e"/>
+                                    <constraint firstItem="3GO-jb-Imo" firstAttribute="leading" secondItem="Vd6-sh-bBg" secondAttribute="leading" constant="16" id="Gie-bx-TB6"/>
+                                    <constraint firstItem="dYn-2y-VJG" firstAttribute="leading" secondItem="Vd6-sh-bBg" secondAttribute="leading" constant="26" id="I1b-0x-06e">
+                                        <variation key="heightClass=compact-widthClass=regular" constant="16"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="16"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="16"/>
+                                    </constraint>
                                     <constraint firstAttribute="trailing" secondItem="3GO-jb-Imo" secondAttribute="trailing" constant="16" id="MhV-vx-Hqk"/>
+                                    <constraint firstItem="3GO-jb-Imo" firstAttribute="centerX" secondItem="Vd6-sh-bBg" secondAttribute="centerX" id="Mit-YU-iSW"/>
+                                    <constraint firstItem="3GO-jb-Imo" firstAttribute="centerX" secondItem="Vd6-sh-bBg" secondAttribute="centerX" id="NRF-qY-TZH"/>
                                     <constraint firstAttribute="trailing" secondItem="3GO-jb-Imo" secondAttribute="trailing" constant="16" id="Oc5-fL-o6I"/>
                                     <constraint firstAttribute="trailing" secondItem="Oan-th-Psf" secondAttribute="trailing" constant="16" id="TVE-wC-1vu"/>
-                                    <constraint firstItem="Oan-th-Psf" firstAttribute="top" secondItem="3GO-jb-Imo" secondAttribute="bottom" constant="8" id="X4f-WC-wZw"/>
+                                    <constraint firstItem="Oan-th-Psf" firstAttribute="top" secondItem="3GO-jb-Imo" secondAttribute="bottom" constant="16" id="X4f-WC-wZw"/>
+                                    <constraint firstItem="3GO-jb-Imo" firstAttribute="width" secondItem="Oan-th-Psf" secondAttribute="width" id="ZDc-nT-qn6"/>
                                     <constraint firstItem="Oan-th-Psf" firstAttribute="leading" secondItem="Vd6-sh-bBg" secondAttribute="leading" constant="16" id="ZNZ-SN-Ecg"/>
                                     <constraint firstItem="3GO-jb-Imo" firstAttribute="leading" secondItem="Vd6-sh-bBg" secondAttribute="leading" constant="8" id="arC-Iz-Mky"/>
                                     <constraint firstItem="3GO-jb-Imo" firstAttribute="leading" secondItem="Vd6-sh-bBg" secondAttribute="leading" constant="16" id="dak-tm-1CK"/>
+                                    <constraint firstItem="Oan-th-Psf" firstAttribute="centerX" secondItem="Vd6-sh-bBg" secondAttribute="centerX" id="dga-0y-wDy"/>
+                                    <constraint firstAttribute="trailing" secondItem="3GO-jb-Imo" secondAttribute="trailing" constant="16" id="e8Q-dv-FbR"/>
                                     <constraint firstItem="GxH-Sb-eUb" firstAttribute="centerX" secondItem="Vd6-sh-bBg" secondAttribute="centerX" id="idi-Ce-QnQ"/>
-                                    <constraint firstItem="GxH-Sb-eUb" firstAttribute="top" secondItem="Vd6-sh-bBg" secondAttribute="top" constant="69" id="odS-d8-Cpn"/>
+                                    <constraint firstItem="3GO-jb-Imo" firstAttribute="width" secondItem="Oan-th-Psf" secondAttribute="width" id="mck-nx-bFf"/>
+                                    <constraint firstItem="GxH-Sb-eUb" firstAttribute="top" secondItem="Vd6-sh-bBg" secondAttribute="top" constant="80" id="odS-d8-Cpn">
+                                        <variation key="heightClass=compact" constant="50"/>
+                                        <variation key="heightClass=regular" constant="80"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="70"/>
+                                    </constraint>
                                     <constraint firstItem="3GO-jb-Imo" firstAttribute="top" secondItem="Vd6-sh-bBg" secondAttribute="top" constant="200" id="ogs-bc-DCz"/>
                                     <constraint firstItem="Oan-th-Psf" firstAttribute="centerX" secondItem="Vd6-sh-bBg" secondAttribute="centerX" id="oni-xA-sUq"/>
-                                    <constraint firstItem="3GO-jb-Imo" firstAttribute="top" secondItem="GxH-Sb-eUb" secondAttribute="bottom" constant="66" id="x6C-1F-nXX"/>
+                                    <constraint firstAttribute="trailing" secondItem="Oan-th-Psf" secondAttribute="trailing" constant="16" id="tiw-KM-pDM"/>
+                                    <constraint firstItem="3GO-jb-Imo" firstAttribute="top" secondItem="GxH-Sb-eUb" secondAttribute="bottom" constant="30" id="x6C-1F-nXX">
+                                        <variation key="heightClass=compact" constant="20"/>
+                                        <variation key="heightClass=regular" constant="30"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                    </constraint>
+                                    <constraint firstItem="Oan-th-Psf" firstAttribute="leading" secondItem="Vd6-sh-bBg" secondAttribute="leading" constant="16" id="yZx-1j-EFS"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="MhV-vx-Hqk"/>
+                                        <exclude reference="Mit-YU-iSW"/>
+                                        <exclude reference="NRF-qY-TZH"/>
+                                        <exclude reference="ZDc-nT-qn6"/>
                                         <exclude reference="arC-Iz-Mky"/>
+                                        <exclude reference="mck-nx-bFf"/>
+                                        <exclude reference="6jr-JZ-Jqj"/>
                                         <exclude reference="7f3-YR-auo"/>
                                         <exclude reference="TVE-wC-1vu"/>
+                                        <exclude reference="dga-0y-wDy"/>
                                         <exclude reference="oni-xA-sUq"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact">
+                                    <mask key="constraints">
+                                        <exclude reference="Gie-bx-TB6"/>
+                                        <include reference="NRF-qY-TZH"/>
+                                        <exclude reference="Oc5-fL-o6I"/>
+                                        <include reference="ZDc-nT-qn6"/>
+                                        <exclude reference="dak-tm-1CK"/>
+                                        <exclude reference="e8Q-dv-FbR"/>
+                                        <exclude reference="ogs-bc-DCz"/>
+                                        <include reference="6jr-JZ-Jqj"/>
+                                        <exclude reference="CfN-mZ-a6d"/>
+                                        <exclude reference="ZNZ-SN-Ecg"/>
+                                        <exclude reference="tiw-KM-pDM"/>
+                                        <exclude reference="yZx-1j-EFS"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular">
+                                    <mask key="constraints">
+                                        <exclude reference="Oc5-fL-o6I"/>
+                                        <exclude reference="dak-tm-1CK"/>
+                                        <exclude reference="ogs-bc-DCz"/>
+                                        <exclude reference="CfN-mZ-a6d"/>
+                                        <exclude reference="ZNZ-SN-Ecg"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <mask key="constraints">
+                                        <exclude reference="Gie-bx-TB6"/>
+                                        <include reference="Mit-YU-iSW"/>
+                                        <exclude reference="e8Q-dv-FbR"/>
+                                        <include reference="mck-nx-bFf"/>
+                                        <include reference="dga-0y-wDy"/>
+                                        <exclude reference="tiw-KM-pDM"/>
+                                        <exclude reference="yZx-1j-EFS"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -133,7 +218,4 @@
             <point key="canvasLocation" x="440.80000000000001" y="253.2233883058471"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="close" width="25" height="25"/>
-    </resources>
 </document>
