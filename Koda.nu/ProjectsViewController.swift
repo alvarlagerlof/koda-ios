@@ -34,13 +34,16 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     let realm = try! Realm()
     var listArray = [ProjectsItem]()
+    
+    var syncCounter = 10000000
+    var timer = Timer()
+    
     var notificationToken: NotificationToken?
 
-    var shouldWait = true
+
     
     
     @IBOutlet weak var table: UITableView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     
     
@@ -57,40 +60,39 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         
         // Listen for updates
-        NotificationCenter.default.addObserver(self, selector: #selector(ProjectsViewController.showProgress), name: NSNotification.Name(rawValue: "updateProjectsStarted"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ProjectsViewController.hideProgress), name: NSNotification.Name(rawValue: "updateProjectsDone"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ProjectsViewController.loadProjects), name: NSNotification.Name(rawValue: "updateProjectsDoneOffline"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ProjectsViewController.loadProjects), name: .projectsReload, object: nil)
 
         
         
         
         // Realm updates
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.updateSyncCount), userInfo: nil, repeats: true)
+        
         notificationToken = realm.addNotificationBlock { note, realm in
             self.showProgress()
-            self.shouldWait = false
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.syncCounter = 1000
+        }
+        
+        
+    }
+
+    func updateSyncCount(){
+        if syncCounter >= 0 {
+            syncCounter -= 100
+            if syncCounter <= 0 {
                 self.loadProjects()
             }
         }
         
-        
-        // If offline, sync won't do anything
-        // and it will be done before the view is loaded
-        if !Reachability.isConnectedToNetwork() {
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProjectsDone"), object: self)
-        }
-        
     }
-
     
 
     
 
     func loadProjects() {
         
-        
-        if shouldWait == false {
-            
+        DispatchQueue.main.async {
+            self.removeAllOverlays()
             self.showProgress()
             
             // Remove all
@@ -102,7 +104,7 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
             
             
             // Content
-            let objects = realm.objects(ProjectsRealmItem.self).sorted(byKeyPath: "updatedRealm", ascending: false)
+            let objects = self.realm.objects(ProjectsRealmItem.self).sorted(byKeyPath: "updatedRealm", ascending: false)
             
             
             if (objects.count == 0) {
@@ -130,15 +132,16 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
                 }
             }
             
-            if table != nil {
+            self.removeAllOverlays()
+
+            
+            if self.table != nil {
                 self.table.reloadData()
-                self.removeAllOverlays()
+                let indexPath = IndexPath(row: 0, section: 0)
+                self.table.scrollToRow(at: indexPath, at: .top, animated: true)
             }
-            
-            let indexPath = IndexPath(row: 0, section: 0)
-            self.table.scrollToRow(at: indexPath, at: .top, animated: true)
-            
         }
+        
         
     }
 
@@ -155,6 +158,7 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
             case "header":
                 let cell2 = self.table.dequeueReusableCell(withIdentifier: "cellNew", for: indexPath) as! ProjectsNewViewCell
                 cell2.newButton.addTarget(self, action: #selector(createNew(_:)), for:.touchUpInside)
+                cell2.newButton.setTitleColor(UIColor(hex: Vars.APP_COLOR), for: UIControlState.normal)
                 cell = cell2
             
             case "noProjects":
@@ -164,7 +168,7 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
                 let cell2 = self.table.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ProjectsViewCell
             
                 cell2.titleLabel.text = listArray[(indexPath.row)].title
-                cell2.dateLabel.text = DateHelper().timeStampToDate(timeStamp: listArray[(indexPath.row)].updated)
+                cell2.dateLabel.text = listArray[(indexPath.row)].updated.timestampToDate
             
                 if indexPath.row != 0 {
                     cell2.moreButton.tag = indexPath.row
@@ -189,7 +193,7 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let storyboard = UIStoryboard(name: "Editor", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "editor") as! EditorViewController
-        vc.privateID = self.listArray[indexPath.row].privateID
+        vc.firstPrivateID = self.listArray[indexPath.row].privateID
         
         navigationController?.pushViewController(vc, animated: true)
         
@@ -243,7 +247,15 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
         self.removeAllOverlays()
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        UIApplication.shared.statusBarStyle = .default
+    }
+    
     deinit{
+        NotificationCenter.default.removeObserver(self)
+        
+        // Realm notfications
         if let notificationToken = notificationToken{
             notificationToken.stop()
         }

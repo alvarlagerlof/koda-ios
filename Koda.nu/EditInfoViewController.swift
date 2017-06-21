@@ -60,8 +60,8 @@ class EditInfoViewController: FormViewController {
         
         
         try! realm.write {
-            object?.title = (titleRow?.value)!
-            object?.descriptionText = (descriptionRow?.value)!
+            object?.title = titleRow?.value == nil ? "Namnlös" : (titleRow?.value)!
+            object?.descriptionText = descriptionRow?.value == nil ? "" : (descriptionRow?.value)!
             object?.isPublic = (publicRow?.value)!
             object?.updatedRealm = String(Int(round(NSDate().timeIntervalSince1970)))
             object?.isSynced = false

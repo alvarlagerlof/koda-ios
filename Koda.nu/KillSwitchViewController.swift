@@ -11,7 +11,7 @@ import Firebase
 
 class KillswitchViewController: UIViewController {
     
-    @IBOutlet weak var backgroundVIew: UIView!
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var titleTextVIew: UITextView!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var actionTextView: UITextView!
@@ -22,6 +22,9 @@ class KillswitchViewController: UIViewController {
         super.viewDidLoad()
         
         UIApplication.shared.statusBarStyle = .lightContent
+        
+        scrollView.backgroundColor = UIColor(hex: Vars.APP_COLOR)
+
         
         if !didNotFetch {
             titleTextVIew.text = Vars.KILLSWITCH_TITLE
@@ -36,9 +39,9 @@ class KillswitchViewController: UIViewController {
         
         
         
-        titleTextVIew.backgroundColor = UIColor(red: 63.0/255.0, green: 81.0/255.0, blue: 181.0/255.0, alpha: 0.0)
-        descriptionTextView.backgroundColor = UIColor(red: 63.0/255.0, green: 81.0/255.0, blue: 181.0/255.0, alpha: 0.0)
-        actionTextView.backgroundColor = UIColor(red: 63.0/255.0, green: 81.0/255.0, blue: 181.0/255.0, alpha: 0.0)
+        titleTextVIew.backgroundColor = UIColor(hex: Vars.APP_COLOR)
+        descriptionTextView.backgroundColor = UIColor(hex: Vars.APP_COLOR)
+        actionTextView.backgroundColor = UIColor(hex: Vars.APP_COLOR)
 
         titleTextVIew.sizeToFit()
         descriptionTextView.sizeToFit()

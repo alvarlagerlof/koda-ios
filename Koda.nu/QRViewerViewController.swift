@@ -29,9 +29,9 @@ class QRViewerViewController: UIViewController {
             
             // Create data json object
             var data: JSON = ["url": "", "title": "", "author": ""]
-            data["url"].string = Base64Helper.encode(decoded: self.recivedUrl)
-            data["title"].string = Base64Helper.encode(decoded: self.recivedTitle)
-            data["author"].string = Base64Helper.encode(decoded: ((author == "" || author == nil) ? "Anonym" : author!))
+            data["url"].string = self.recivedUrl.base64encode
+            data["title"].string = self.recivedTitle.base64encode
+            data["author"].string = ((author == "" || author == nil) ? "Anonym" : author!).base64encode
             
             
             // Create QR code

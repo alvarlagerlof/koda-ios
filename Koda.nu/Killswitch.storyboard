@@ -58,7 +58,7 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="e64-jh-hGw" firstAttribute="centerX" secondItem="dWl-mV-ncE" secondAttribute="centerX" constant="-2" id="Ilb-IQ-h1L"/>
                                             <constraint firstItem="e64-jh-hGw" firstAttribute="top" secondItem="Szc-My-Wcj" secondAttribute="bottom" constant="8" id="We4-bF-Nn5"/>
@@ -92,14 +92,14 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="actionTextView" destination="z4K-Oj-Qx2" id="0zt-DC-eiI"/>
-                        <outlet property="backgroundVIew" destination="dWl-mV-ncE" id="Vfj-Qt-X45"/>
                         <outlet property="descriptionTextView" destination="e64-jh-hGw" id="7vO-GK-ccO"/>
+                        <outlet property="scrollView" destination="0Qt-lF-8pR" id="OSE-iu-fEU"/>
                         <outlet property="titleTextVIew" destination="Szc-My-Wcj" id="rKB-kj-whr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Omv-5Y-bzK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-45" y="105"/>
+            <point key="canvasLocation" x="-53" y="105"/>
         </scene>
     </scenes>
 </document>

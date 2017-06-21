@@ -12,22 +12,29 @@ import Alamofire
 import RealmSwift
 import Firebase
 
-class EditorViewController: UIViewController {
+class EditorViewController: UIViewController, UITextViewDelegate {
 
     
     // Set values
-    var privateID: String = ""
+    var firstPrivateID: String = ""
+    var syncedPrivateID: String = ""
+    var notificationToken: NotificationToken?
+
     
-    var rightBarButtonItem : UIBarButtonItem!
+    var overflowItems: Array<String> = []
+    
+    var rightBarButtonItem: UIBarButtonItem!
+    private var delegate: JLTextStorageDelegate!
+
     
     
     @IBOutlet weak var textEditor: UITextView!
     @IBOutlet weak var gameWebView: UIWebView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var scrollView: UIScrollView!
+
     
     
-    private var delegate: JLTextStorageDelegate!
     
 
     
@@ -40,16 +47,21 @@ class EditorViewController: UIViewController {
         Analytics.logEvent("projects_edit_open", parameters: [:])
 
         
+        // Private id
+        if !firstPrivateID.contains("ny_ny_") {
+            syncedPrivateID = firstPrivateID
+        }
         
-        self.textEditor.text = try! Realm().objects(ProjectsRealmItem.self).filter("privateID = '\(privateID)'").first?.code
         
-        
-        //self.textEditor.backgroundColor = UIColor(red: 13/255, green: 42/255, blue: 70/255, alpha: 1)
-        
+
+        // Editor setup
+        NotificationCenter.default.addObserver(self, selector: #selector(EditorViewController.setSyncedId(_:)), name: .editorSyncedID, object: nil)
         
         delegate = JLTextStorageDelegate(managing: self.textEditor, language: Language.javascript, theme: ColorTheme.default)
-        
         registerForKeyboardNotifications()
+        specialCharsBarSetup()
+        getProject(setText: true)
+
         
         
 
@@ -68,24 +80,13 @@ class EditorViewController: UIViewController {
         rightBarButtonItem.image = UIImage(named: "reload")!
         
         
-    }
-
-
-    // On tab click
-    @IBAction func tabIndexChanged(_ sender: AnyObject) {
-        
-        switch segmentedControl.selectedSegmentIndex {
-            case 0:
-                editor()
-                Analytics.logEvent("projects_edit_tab_editor", parameters: [:])
-            case 1:
-                play()
-                Analytics.logEvent("projects_edit_tab_play", parameters: [:])
-            default:
-                break;
-        }
         
     }
+    
+    
+
+
+    
     
     
     func editor() {
@@ -98,8 +99,12 @@ class EditorViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = nil
         
     }
+    
   
     func play() {
+        textEditor.endEditing(true)
+        
+        
         gameWebView.isHidden = false
         textEditor.isHidden = true
         
@@ -109,37 +114,43 @@ class EditorViewController: UIViewController {
         gameWebView.scrollView.isScrollEnabled = false
 
 
-        saveToRealm()
-        
-        
-        
-    }
+        saveProject()
     
-    
-    func reload(_ sender: UIBarButtonItem) {
-        gameWebView.goBack()
-        gameWebView.loadHTMLString(textEditor.text, baseURL: nil)
-        Analytics.logEvent("projects_edit_reload", parameters: [:])
-
+        
     }
     
     
     
     
-    func saveToRealm() {
-        let realm = try! Realm()
-        let object = realm.objects(ProjectsRealmItem.self).filter("privateID = '\(privateID)'").first
-        
-        if (object?.code != textEditor.text) {
-            try! realm.write {
-                object!.code = textEditor.text
-                object!.updatedRealm = String(Int(round(NSDate().timeIntervalSince1970)))
-                object!.isSynced = false
-            }
+    func getProject(setText: Bool) {
+        if setText {
+            self.textEditor.text = try! Realm().objects(ProjectsRealmItem.self).filter("privateID = '\(syncedPrivateID != "" ? syncedPrivateID : firstPrivateID)'").first?.code
+        }
+    }
+    
+    
+    func saveProject() {
+        if self.syncedPrivateID != "" || !Reachability.isConnectedToNetwork() {
             
+            let realm = try! Realm()
+            let object = realm.objects(ProjectsRealmItem.self).filter("privateID = '\(self.syncedPrivateID)'").first
+                    
+            try! realm.write {
+                object?.code = self.textEditor.text
+                object?.updatedRealm = String(Int(round(NSDate().timeIntervalSince1970)))
+                object?.isSynced = false
+            }
             
             _ = ProjectsSync()
             
+        }
+    }
+    
+    
+    func setSyncedId(_ notification: NSNotification) {
+        if let id = notification.userInfo?["synced_id"] as? String {
+            syncedPrivateID = id
+            getProject(setText: false)
         }
     }
     
@@ -148,23 +159,143 @@ class EditorViewController: UIViewController {
     
     
     
-    override func viewWillDisappear(_ animated: Bool) {
-        saveToRealm()
+    
+    
+    
+    
+    func specialCharsBarSetup() {
+        
+        // Lists
+        let specialChars = ["(", ")", ",", ".", ";", "{", "}",
+                            "\"", ":",
+                            "-", "+", "*", "/",
+                            "=", "!",
+                            "<", ">",
+                            "[", "]",
+                            "%", "?",
+                            "&", "|"]
+        
+        overflowItems.removeAll()
+        
+        var toolbarItems = [UIBarButtonItem]()
+
+        
+        // Add tooblarItems
+        for (index, item) in specialChars.enumerated() {
+            if (index < 7) {
+                toolbarItems.append(UIBarButtonItem(title: (index == 0 ? "  " : "   ") + item + "   " , style: .plain, target: nil, action: #selector(addSpecialChar)))
+            } else {
+                overflowItems.append(item)
+            }
+        }
+        
+        
+        // Extra items
+        toolbarItems.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
+        toolbarItems.append(UIBarButtonItem(image: UIImage(named: "more"), landscapeImagePhone: UIImage(named: "more"), style: .plain, target: nil, action: #selector(specialCharsMore)))
+        
+        
+        // Create toolbar and add to keyboard
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        toolbar.items = toolbarItems
+        toolbar.tintColor = UIColor(hex: Vars.APP_COLOR)
+        
+        self.textEditor.inputAccessoryView = toolbar
+        
     }
+    
+    
+    
+    func specialCharsMore(_ sender: UIBarButtonItem) {
+        
+        
+        // Create action sheet
+        let optionMenu: UIAlertController = UIAlertController(title: "Fler specialtecken", message: nil, preferredStyle: .actionSheet)
+        
+        
+        for item in overflowItems {
+            
+            optionMenu.addAction(UIAlertAction(title: item, style: .default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                self.textEditor.insertText(item)
+        
+            }))
+            
+        }
+        
+        
+        
+        // Cancel
+        optionMenu.addAction(UIAlertAction(title: "Avbryt", style: .cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+            Analytics.logEvent("projects_more_cancel", parameters: [:])
+        }))
+        
+        
+        
+        // Show
+        optionMenu.popoverPresentationController?.barButtonItem = sender
+        self.present(optionMenu, animated: true, completion: nil)
+        
+        
+
+    }
+    
+    
+    func reload(_ sender: UIBarButtonItem) {
+        gameWebView.goBack()
+        gameWebView.loadHTMLString(textEditor.text, baseURL: nil)
+        Analytics.logEvent("projects_edit_reload", parameters: [:])
+    }
+    
+    
+    
+    // Special chars bar click
+    func addSpecialChar(sender: UIBarButtonItem) {
+        self.textEditor.insertText((sender.title?.replacingOccurrences(of: " ", with: ""))!)
+    }
+    
+    
+    
+    
+    
+    // On tab click
+    @IBAction func tabIndexChanged(_ sender: AnyObject) {
+        
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            editor()
+            Analytics.logEvent("projects_edit_tab_editor", parameters: [:])
+        case 1:
+            play()
+            Analytics.logEvent("projects_edit_tab_play", parameters: [:])
+        default:
+            break;
+        }
+        
+    }
+    
+
+    
+    // Save on close
+    override func viewWillDisappear(_ animated: Bool) {
+        saveProject()
+    }
+    
+    
+    
     
     
     
     // MARK: Content Insets and Keyboard
     
     func registerForKeyboardNotifications() {
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
-    func unregisterForKeyboardNotifications() {
-        NotificationCenter.default.removeObserver(self)
-    }
+
     
     // Called when the UIKeyboardDidShowNotification is sent.
     func keyboardWasShown(_ notification: Notification) {
@@ -207,9 +338,8 @@ class EditorViewController: UIViewController {
     
     
     deinit {
-        unregisterForKeyboardNotifications()
+        NotificationCenter.default.removeObserver(self)
     }
-
     
     
     

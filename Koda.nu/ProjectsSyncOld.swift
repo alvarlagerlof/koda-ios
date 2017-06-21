@@ -1,74 +1,88 @@
 //
-//  ProjectsSyncNew.swift
+//  ProjectsSync.swift
 //  Koda.nu
 //
-//  Created by Alvar Lagerlöf on 6/20/17.
+//  Created by Alvar Lagerlöf on 2/12/17.
 //  Copyright © 2017 Alvar Lagerlöf. All rights reserved.
 //
 
 import Foundation
-import UIKit
-import RealmSwift
-import SwiftyJSON
 import Alamofire
+import SwiftyJSON
+import RealmSwift
+import FirebaseAnalytics
+import SwiftOverlays
 
+public class ProjectsSyncOld {
 
-public class ProjectsSync {
-    
+    var openPrivateID: String = ""
+    var sendNothing: Bool = false
     var nav: UINavigationController? = nil
-    var openPrivateID: String? = nil
-
-
+    
+    
     init() {
+                
         
-        // Sync or just update list
-        if Reachability.isConnectedToNetwork() {
-            sendToServer()
-        } else {
-            NotificationCenter.default.post(name: .projectsReload, object: self)
-        }
-    }
-    
-    
-    
-    init(nav: UINavigationController, openPrivateID: String) {
-        self.nav = nav
-        self.openPrivateID = openPrivateID
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProjectsStarted"), object: self)
 
-        
-        // Open editor
-        let storyboard = UIStoryboard(name: "Editor", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "editor") as! EditorViewController
-        vc.firstPrivateID = self.openPrivateID!
-        self.nav?.pushViewController(vc, animated: true)
-        
-        
-        // Sync or just update list
         if Reachability.isConnectedToNetwork() {
             sendToServer()
         } else {
-            NotificationCenter.default.post(name: .projectsReload, object: self)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProjectsDoneOffline"), object: self)
         }
     }
     
     
+    init(openPrivateID: String, sendNothing: Bool, nav: UINavigationController) {
+        self.sendNothing = true
+        self.openPrivateID = openPrivateID
+        self.nav = nav
+
+        if Reachability.isConnectedToNetwork() {
+            sendToServer()
+        } else {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProjectsDoneOffline"), object: self)
+        }
+    }
     
+    
+    init(openPrivateID: String, nav: UINavigationController) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProjectsStarted"), object: self)
+        self.openPrivateID = openPrivateID
+        self.nav = nav
+        
+        if Reachability.isConnectedToNetwork() {
+            sendToServer()
+            
+        } else {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProjectsDoneOffline"), object: self)
+
+            let storyboard = UIStoryboard(name: "Editor", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "editor") as! EditorViewController
+            vc.firstPrivateID = self.openPrivateID
+            self.nav?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    
+   
     
     
     
     func sendToServer() {
         
         DispatchQueue.global(qos: .userInitiated).async {
-            
-            
+        
+
             let realm = try! Realm()
             
-        
+            
             // Get all realm projects
             let realmProjects = realm.objects(ProjectsRealmItem.self)
             
             
-            // Create a json array
+            
+            // Create json array
             var projects: [JSON] = []
             
             
@@ -87,108 +101,50 @@ public class ProjectsSync {
                 }
                 
                 projects.append(jsonObject)
-                
-                
-            }
-            
-            
-            // Create parameters
-            let parameters: Parameters = ["projects": JSON(projects)]
-            
-    
-            Alamofire.request(Vars.URL_PROJECTS_SYNC, method: .post, parameters: parameters).responseJSON { response in
-                switch response.result {
-                case .success:
-                    
-                    // Get JSON array
-                    let json = JSON(response.result.value as Any)["projects"].arrayValue
-                    
-                    
-                    // Get new openPrivateID
-                    if response.result.value != nil && self.openPrivateID != nil {
-                        for item in json {
-                            if self.openPrivateID == item["old_privateID"].string {
-                                self.openPrivateID = item["privateID"].string
-                            }
-                        }
-                    }
-                    
-                    DispatchQueue.main.async {
-                        self.sendNothing()
-                    }
-                    
-                case .failure(let error):
-                    print(error)
-                    
-                }
-                
-            }
-        }
 
-        
-    }
-    
-    
-    
-    func sendNothing() {
-        
-        DispatchQueue.global(qos: .userInitiated).async {
+                
+            }
             
             
-            // Create parameters
-            let parameters: Parameters = ["projects": "[]"]
+            
+            var parameters: Parameters = ["projects": JSON(projects)]
+            
+            if (realmProjects.count == 0 || self.sendNothing) {
+                parameters = ["projects": "[]"]
+            }
             
             
             Alamofire.request(Vars.URL_PROJECTS_SYNC, method: .post, parameters: parameters).responseJSON { response in
+               
                 switch response.result {
-                case .success:
+                    case .success:
+                        DispatchQueue.main.async {
+                            self.dealWithResponse(response: JSON(response.result.value as Any))
+                        }
                     
-                    DispatchQueue.main.async {
-                        self.dealWithResponse(response: JSON(response.result.value as Any))
-                    }
-                    
-                case .failure(let error):
-                    print(error)
+                    case .failure(let error):
+                        print(error)
                     
                 }
                 
             }
         }
+        
     }
+    
     
     
     func dealWithResponse(response: JSON) {
-        
+    
         DispatchQueue.global(qos: .userInitiated).async {
             
             let realm = try! Realm()
-            
-            
+
             // Get child "projects" -> Array
             let responseArray: Array = response["projects"].arrayValue
             
-            // If resonse is not empty
+            // If resonse is not empty 
             if responseArray.count > 0 {
-                
-                
-                // Remove projects that exists on the client but not on the server
-                for project in realm.objects(ProjectsRealmItem.self) {
-                    var hasFoundInJson = false
-                    
-                    for item in responseArray {
-                        if item["privateID"].string == project.privateID {
-                            hasFoundInJson = true
-                        }
-                    }
-                    if !hasFoundInJson {
-                        try! realm.write {
-                            realm.delete(project)
-                        }
-                    }
-                }
-                    
-                
-                
                 
                 // Loop over response
                 for responseItem in responseArray {
@@ -210,7 +166,9 @@ public class ProjectsSync {
                             realmProject.isPublic        = responseItem["public"].bool!
                             realmProject.updatedServer   = String(describing: responseItem["updated"])
                             realmProject.updatedRealm    = String(describing: responseItem["updated"])
-                                                        
+                            
+                            
+                            if (realmProject.title == "") { realmProject.title = "Namnlös" }
                         }
                     } else {
                         
@@ -226,30 +184,83 @@ public class ProjectsSync {
                         newRealmProject.updatedServer   = String(describing: responseItem["updated"])
                         newRealmProject.updatedRealm    = String(describing: responseItem["updated"])
                         
+                        if (newRealmProject.title == "") { newRealmProject.title = "Namnlös" }
+                        
                         try! realm.write {
                             realm.add(newRealmProject)
                         }
+                        
+                        
                     }
+                    
+                    
+                    
+                    // Open id for project to open
+                    if (!self.sendNothing) {
+                        if self.openPrivateID == responseItem["old_privateID"].string {
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProjectsStarted"), object: self)
+                            self.openPrivateID = responseItem["privateID"].string!
+                        }
+                    }
+                    
+                    
+                    
+                    
+
                 }
                 
                 
-            } else {
-                NotificationCenter.default.post(name: .projectsReload, object: self)
                 
             }
             
-            if self.openPrivateID != nil {
-                //let syncDataDict:[String: String] = ["image": self.openPrivateID!]
+            
+            
+            DispatchQueue.main.async {
 
-                NotificationCenter.default.post(name: .editorSyncedID, object: self, userInfo: ["synced_id": self.openPrivateID!])
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProjectsStarted"), object: self)
+                
+                
+                if (!self.sendNothing) {
+                    
+                    let realm = try! Realm()
+                    
+                    try! realm.write {
+                        realm.delete(realm.objects(ProjectsRealmItem.self))
+                    }
+
+                    if self.nav == nil {
+                        _ = ProjectsSyncOld(openPrivateID: self.openPrivateID, sendNothing: true, nav: UINavigationController.init())
+                    } else {
+                        _ = ProjectsSyncOld(openPrivateID: self.openPrivateID, sendNothing: true, nav: self.nav!)
+                    }
+                    
+                    
+                } else {
+                    
+
+                    
+                    // Open new project
+                    if self.openPrivateID != "" {
+                        DispatchQueue.main.async() {
+                            let storyboard = UIStoryboard(name: "Editor", bundle: nil)
+                            let vc = storyboard.instantiateViewController(withIdentifier: "editor") as! EditorViewController
+                            vc.firstPrivateID = self.openPrivateID
+                            self.nav?.pushViewController(vc, animated: true)
+                        }
+                        
+                    }
+                    
+
+                    
+                }
             }
             
-            
-            
+           
         }
+
         
     }
     
     
-    
+
 }

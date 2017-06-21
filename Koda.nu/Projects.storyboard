@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="u4R-5H-Do7">
-    <device id="ipad9_7" orientation="landscape">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -19,11 +19,11 @@
                         <viewControllerLayoutGuide type="bottom" id="7j7-bq-PX0"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="UbQ-Mg-9gi">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ED5-WL-aMC">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="719"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="845" id="P1v-oO-HOy">
@@ -38,13 +38,13 @@
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellNew" rowHeight="85" id="3C9-iW-lz3" customClass="ProjectsNewViewCell" customModule="Koda_nu">
-                                        <rect key="frame" x="0.0" y="28" width="1024" height="85"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="3C9-iW-lz3" id="vnr-TP-uFb">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="85"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3C9-iW-lz3" id="vnr-TP-uFb">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="84"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uzt-y2-oTr">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uzt-y2-oTr">
                                                     <rect key="frame" x="16" y="3" width="992" height="79"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="79" id="LpB-sO-Wjv"/>
@@ -149,30 +149,30 @@
                                             </variation>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="newButton" destination="uzt-y2-oTr" id="yYc-Ec-Qat"/>
+                                            <outlet property="newButton" destination="uzt-y2-oTr" id="77r-Zn-eRs"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="59" id="K9p-NA-LqA" customClass="ProjectsViewCell" customModule="Koda_nu" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="113" width="1024" height="59"/>
+                                        <rect key="frame" x="0.0" y="113" width="414" height="59"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K9p-NA-LqA" id="nc8-xy-puJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="59"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="58"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f0N-vf-3JC">
-                                                    <rect key="frame" x="184" y="11" width="611" height="21"/>
+                                                    <rect key="frame" x="16" y="8" width="337" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ajm-n6-ZzE">
-                                                    <rect key="frame" x="184" y="34" width="611" height="14"/>
+                                                    <rect key="frame" x="16" y="31" width="337" height="19"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                     <color key="textColor" red="0.32726362180000002" green="0.32726362180000002" blue="0.32726362180000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="slg-hS-LyO">
-                                                    <rect key="frame" x="803" y="3" width="50" height="53"/>
+                                                    <rect key="frame" x="361" y="0.0" width="50" height="58"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="6BZ-uq-E8k"/>
                                                         <constraint firstAttribute="width" constant="50" id="kUp-eH-KHK"/>
@@ -278,27 +278,27 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellNoProjects" rowHeight="237" id="kEs-Hp-4Ih" customClass="ProjectsNoProjectsViewCell" customModule="Koda_nu" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="172" width="1024" height="237"/>
+                                        <rect key="frame" x="0.0" y="172" width="414" height="237"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kEs-Hp-4Ih" id="yzx-li-AFW">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="237"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="236"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="offline" translatesAutoresizingMaskIntoConstraints="NO" id="GUX-FW-g02">
-                                                    <rect key="frame" x="457" y="27" width="110" height="110"/>
+                                                    <rect key="frame" x="457" y="24" width="110" height="110"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="110" id="3a4-Fn-Bjq"/>
                                                         <constraint firstAttribute="width" constant="110" id="QCq-ky-Abu"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inga projekt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2MR-t5-n3e">
-                                                    <rect key="frame" x="444" y="145" width="136" height="33"/>
+                                                    <rect key="frame" x="444" y="142" width="136" height="33"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                                     <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Klicka på &quot;Skapa nytt&quot; för att göra ett nytt projekt" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2kl-LU-JYI">
-                                                    <rect key="frame" x="208" y="186" width="608" height="20"/>
+                                                    <rect key="frame" x="24" y="183" width="976" height="25"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.32726362180000002" green="0.32726362180000002" blue="0.32726362180000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -462,7 +462,7 @@
     </scenes>
     <resources>
         <image name="more" width="25" height="25"/>
-        <image name="offline" width="160" height="160"/>
+        <image name="offline" width="213" height="213"/>
         <image name="qr" width="25" height="25"/>
         <image name="settings" width="25" height="25"/>
     </resources>

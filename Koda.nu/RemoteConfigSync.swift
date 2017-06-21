@@ -23,8 +23,9 @@ public class RemoteConfigSync {
         remoteConfig.configSettings = remoteConfigSettings!
         remoteConfig.setDefaults(fromPlist: "RemoteConfigDefaults")
         
-        remoteConfig.fetch(withExpirationDuration: TimeInterval(60)) { (status, error) -> Void in
+        remoteConfig.fetch(withExpirationDuration: TimeInterval(60*5)) { (status, error) -> Void in
             if status == .success {
+
                 
                 print("Config fetched!")
                 

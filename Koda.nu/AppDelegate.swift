@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import RealmSwift
 
 
 @UIApplicationMain
@@ -18,6 +19,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        window?.tintColor = UIColor(hex: Vars.APP_COLOR)
+
+        
+        
+        Realm.Configuration.defaultConfiguration = Realm.Configuration(
+            schemaVersion: 1,
+            migrationBlock: { migration, oldSchemaVersion in
+                    
+                // Runs if schmaversion changes to 2
+                if (oldSchemaVersion <= 2) {
+                    
+                }
+                    
+                // Runs if schmaversion changes to 3
+                if (oldSchemaVersion <= 3) {
+                    
+                }
+        })
+        
+        
+        
         // Firebase
         FirebaseApp.configure()
         
@@ -27,10 +49,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         
-        // Toolbar
-        UINavigationBar.appearance().barTintColor = UIColor(red: 63.0/255.0, green: 81.0/255.0, blue: 181.0/255.0, alpha: 1.0)
-        UINavigationBar.appearance().tintColor = UIColor.white
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        
+        
+
         
         
         return true

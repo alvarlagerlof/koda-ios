@@ -29,6 +29,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         Analytics.logEvent("login_main_open", parameters: [:])
+        UIApplication.shared.statusBarStyle = .lightContent
 
         
         

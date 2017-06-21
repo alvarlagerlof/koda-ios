@@ -12,8 +12,11 @@ import Alamofire
 
 public class RequestQueueSync {
     
+    var nav: UINavigationController? = nil
+    
+    
     init() {
-                
+        
         if Reachability.isConnectedToNetwork() {
             eatQueue()
         } else {

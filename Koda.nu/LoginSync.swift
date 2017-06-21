@@ -14,7 +14,7 @@ public class LoginSync {
 
     
     init() {
-                
+        
         // If connected to internet
         if Reachability.isConnectedToNetwork() {
         

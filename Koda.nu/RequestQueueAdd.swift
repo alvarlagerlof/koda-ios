@@ -13,7 +13,7 @@ import RealmSwift
 public class RequestQueueAdd {
 
 
-    init(url: String) {
+    init(nav: UINavigationController, url: String) {
         
         let realm = try! Realm()
         

@@ -101,15 +101,12 @@ public class ProjectsMoreActionSheet {
                     Analytics.logEvent("projects_more_delete_successful", parameters: [:])
                     
                     
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProjectsStarted"), object: self)
-                    
-                    _ = RequestQueueAdd(url: Vars.URL_PROJECTS_DELETE + (project?.privateID)! )
+                    _ = RequestQueueAdd(nav: nav, url: Vars.URL_PROJECTS_DELETE + (project?.privateID)! )
                     
                     try! realm.write {
                         realm.delete(project!)
                     }
                     
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProjectsDone"), object: self)
                     
                 }))
                 

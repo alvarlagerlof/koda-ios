@@ -10,6 +10,11 @@ import FirebaseRemoteConfig
 
 struct Vars {
     
+    // Color
+    static let APP_COLOR = "#355dc4"
+    
+    
+    
     // Main
     static let BASE_URL = FRCG().getS(name: "base_url")
     static let API_VERSION = FRCG().getS(name: "api_version")

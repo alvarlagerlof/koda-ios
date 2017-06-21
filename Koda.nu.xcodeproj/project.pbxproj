@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		1B0586021E97B09A00ABA497 /* RequestQueueItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0586011E97B09A00ABA497 /* RequestQueueItem.swift */; };
 		1B0586041E97B0F300ABA497 /* RequestQueueSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0586031E97B0F300ABA497 /* RequestQueueSync.swift */; };
+		1B1859E11EF93C9F00B05319 /* ExtensionBase64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1859E01EF93C9F00B05319 /* ExtensionBase64.swift */; };
+		1B1859E31EF93DEA00B05319 /* ExtensionDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1859E21EF93DEA00B05319 /* ExtensionDate.swift */; };
+		1B1859E51EF9A08500B05319 /* ProjectsSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1859E41EF9A08500B05319 /* ProjectsSync.swift */; };
+		1B1859E71EF9CBFF00B05319 /* ExtensionNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1859E61EF9CBFF00B05319 /* ExtensionNotification.swift */; };
 		1B354AF61E563CC8006CB707 /* LoginSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B354AF51E563CC8006CB707 /* LoginSync.swift */; };
 		1B68D1651ED8765F00F1B98F /* EditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B68D1641ED8765F00F1B98F /* EditInfoViewController.swift */; };
 		1B68D1731ED9BCE800F1B98F /* KillSwitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B68D1721ED9BCE800F1B98F /* KillSwitchViewController.swift */; };
@@ -18,7 +22,6 @@
 		1B8A87AA1E953C6C00146C20 /* FRCG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8A87A91E953C6C00146C20 /* FRCG.swift */; };
 		1B8A87AC1E95547200146C20 /* ProjectsNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8A87AB1E95547200146C20 /* ProjectsNew.swift */; };
 		1B8A87AE1E95553A00146C20 /* ViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8A87AD1E95553A00146C20 /* ViewHelper.swift */; };
-		1B8A87B01E95617400146C20 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8A87AF1E95617400146C20 /* DateHelper.swift */; };
 		1B8A87B21E9562DB00146C20 /* ProjectsMoreActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8A87B11E9562DB00146C20 /* ProjectsMoreActionSheet.swift */; };
 		1B8A87C91E959EFE00146C20 /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8A87BA1E959EFE00146C20 /* ColorTheme.swift */; };
 		1B8A87CA1E959EFE00146C20 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B8A87BB1E959EFE00146C20 /* Info.plist */; };
@@ -34,8 +37,8 @@
 		1B8A87D41E959EFE00146C20 /* NSIndexSet+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8A87C51E959EFE00146C20 /* NSIndexSet+Additions.swift */; };
 		1B8A87D51E959EFE00146C20 /* TokenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8A87C61E959EFE00146C20 /* TokenType.swift */; };
 		1B8A87D61E959EFE00146C20 /* UITextViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8A87C71E959EFE00146C20 /* UITextViewExtensions.swift */; };
-		1BE4FF311E511B8400515395 /* ProjectsSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE4FF301E511B8400515395 /* ProjectsSync.swift */; };
-		1BE4FF331E5253DC00515395 /* Base64Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE4FF321E5253DC00515395 /* Base64Helper.swift */; };
+		1BE4FF311E511B8400515395 /* ProjectsSyncOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE4FF301E511B8400515395 /* ProjectsSyncOld.swift */; };
+		1BF626B41EF93AF7002D61C2 /* ExtensionColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF626B31EF93AF7002D61C2 /* ExtensionColor.swift */; };
 		1BF68F731E97BB4D009438BA /* RequestQueueAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF68F721E97BB4D009438BA /* RequestQueueAdd.swift */; };
 		1BFBDF851E4CF53E00743B22 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1BFBDF841E4CF53E00743B22 /* GoogleService-Info.plist */; };
 		2404B0B11DAEAD7200D028D2 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2404B0B01DAEAD7200D028D2 /* Login.storyboard */; };
@@ -124,6 +127,10 @@
 /* Begin PBXFileReference section */
 		1B0586011E97B09A00ABA497 /* RequestQueueItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestQueueItem.swift; sourceTree = "<group>"; };
 		1B0586031E97B0F300ABA497 /* RequestQueueSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestQueueSync.swift; sourceTree = "<group>"; };
+		1B1859E01EF93C9F00B05319 /* ExtensionBase64.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionBase64.swift; sourceTree = "<group>"; };
+		1B1859E21EF93DEA00B05319 /* ExtensionDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionDate.swift; sourceTree = "<group>"; };
+		1B1859E41EF9A08500B05319 /* ProjectsSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsSync.swift; sourceTree = "<group>"; };
+		1B1859E61EF9CBFF00B05319 /* ExtensionNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionNotification.swift; sourceTree = "<group>"; };
 		1B354AF51E563CC8006CB707 /* LoginSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSync.swift; sourceTree = "<group>"; };
 		1B68D1641ED8765F00F1B98F /* EditInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditInfoViewController.swift; sourceTree = "<group>"; };
 		1B68D1721ED9BCE800F1B98F /* KillSwitchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KillSwitchViewController.swift; sourceTree = "<group>"; };
@@ -133,7 +140,6 @@
 		1B8A87A91E953C6C00146C20 /* FRCG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FRCG.swift; sourceTree = "<group>"; };
 		1B8A87AB1E95547200146C20 /* ProjectsNew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsNew.swift; sourceTree = "<group>"; };
 		1B8A87AD1E95553A00146C20 /* ViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewHelper.swift; sourceTree = "<group>"; };
-		1B8A87AF1E95617400146C20 /* DateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		1B8A87B11E9562DB00146C20 /* ProjectsMoreActionSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsMoreActionSheet.swift; sourceTree = "<group>"; };
 		1B8A87B81E959EFE00146C20 /* Chromatism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chromatism.h; path = Chromatism/Chromatism.h; sourceTree = "<group>"; };
 		1B8A87BA1E959EFE00146C20 /* ColorTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorTheme.swift; path = Chromatism/ColorTheme.swift; sourceTree = "<group>"; };
@@ -150,8 +156,8 @@
 		1B8A87C51E959EFE00146C20 /* NSIndexSet+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSIndexSet+Additions.swift"; path = "Chromatism/NSIndexSet+Additions.swift"; sourceTree = "<group>"; };
 		1B8A87C61E959EFE00146C20 /* TokenType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TokenType.swift; path = Chromatism/TokenType.swift; sourceTree = "<group>"; };
 		1B8A87C71E959EFE00146C20 /* UITextViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITextViewExtensions.swift; path = Chromatism/UITextViewExtensions.swift; sourceTree = "<group>"; };
-		1BE4FF301E511B8400515395 /* ProjectsSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsSync.swift; sourceTree = "<group>"; };
-		1BE4FF321E5253DC00515395 /* Base64Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base64Helper.swift; sourceTree = "<group>"; };
+		1BE4FF301E511B8400515395 /* ProjectsSyncOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsSyncOld.swift; sourceTree = "<group>"; };
+		1BF626B31EF93AF7002D61C2 /* ExtensionColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionColor.swift; sourceTree = "<group>"; };
 		1BF68F721E97BB4D009438BA /* RequestQueueAdd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestQueueAdd.swift; sourceTree = "<group>"; };
 		1BFBDF841E4CF53E00743B22 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../temadagar-ios/Temadagar/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2404B0B01DAEAD7200D028D2 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
@@ -352,6 +358,17 @@
 			name = "Remote config";
 			sourceTree = "<group>";
 		};
+		1BF626B21EF93AD7002D61C2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1BF626B31EF93AF7002D61C2 /* ExtensionColor.swift */,
+				1B1859E01EF93C9F00B05319 /* ExtensionBase64.swift */,
+				1B1859E21EF93DEA00B05319 /* ExtensionDate.swift */,
+				1B1859E61EF9CBFF00B05319 /* ExtensionNotification.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		23824B5533C97AFF14EE6014 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -448,6 +465,7 @@
 			isa = PBXGroup;
 			children = (
 				244D58BB1DD0DB5100DFAAFB /* AppDelegate.swift */,
+				1BF626B21EF93AD7002D61C2 /* Extensions */,
 				1B0586001E97B05700ABA497 /* RequestQueue */,
 				245A55501DD4741F00FE84B9 /* Comments */,
 				24A1685D1D72BD360006040D /* API */,
@@ -460,10 +478,8 @@
 				2404B0BC1DAEB80900D028D2 /* Play */,
 				1B68D1711ED9BCBF00F1B98F /* Killswitch */,
 				1BCF708F1EEA005400578B32 /* Remote config */,
-				1BE4FF321E5253DC00515395 /* Base64Helper.swift */,
 				2406B9CB1DDD9D2100D94AF1 /* Reachability.swift */,
 				244D58C91DD0DDCE00DFAAFB /* Vars.swift */,
-				1B8A87AF1E95617400146C20 /* DateHelper.swift */,
 				1B8A87AD1E95553A00146C20 /* ViewHelper.swift */,
 				24548BDE1D5F68C10034209E /* Assets.xcassets */,
 				2404B0B81DAEB4FE00D028D2 /* Main.storyboard */,
@@ -558,14 +574,15 @@
 		24A1685C1D72BD260006040D /* Projects */ = {
 			isa = PBXGroup;
 			children = (
-				1B8A87B71E959EE800146C20 /* Chromatism */,
 				2404B0C51DAEC3EE00D028D2 /* Editor */,
 				1B68D1631ED8764100F1B98F /* Edit info */,
 				1B8A87B31E9572E600146C20 /* Views */,
 				1B8A87B41E9572FE00146C20 /* Items */,
-				1B8A87B11E9562DB00146C20 /* ProjectsMoreActionSheet.swift */,
+				1B8A87B71E959EE800146C20 /* Chromatism */,
 				1B8A87AB1E95547200146C20 /* ProjectsNew.swift */,
-				1BE4FF301E511B8400515395 /* ProjectsSync.swift */,
+				1B8A87B11E9562DB00146C20 /* ProjectsMoreActionSheet.swift */,
+				1BE4FF301E511B8400515395 /* ProjectsSyncOld.swift */,
+				1B1859E41EF9A08500B05319 /* ProjectsSync.swift */,
 			);
 			name = Projects;
 			sourceTree = "<group>";
@@ -850,7 +867,6 @@
 				24A133EC1DD449C600337323 /* AboutViewController.swift in Sources */,
 				2406B9CE1DDF2E1B00D94AF1 /* GuidesTextCell.swift in Sources */,
 				2406B9D01DDF2E2B00D94AF1 /* GuidesTextWithTitleCell.swift in Sources */,
-				1BE4FF331E5253DC00515395 /* Base64Helper.swift in Sources */,
 				1B8A87D11E959EFE00146C20 /* JLTextStorage.swift in Sources */,
 				1B8A87D41E959EFE00146C20 /* NSIndexSet+Additions.swift in Sources */,
 				24A3E64F1D5F6AB500E268E4 /* ArchiveItem.swift in Sources */,
@@ -861,15 +877,16 @@
 				24209B681D7B5260002B331D /* ProjectsNewViewCell.swift in Sources */,
 				1B0586041E97B0F300ABA497 /* RequestQueueSync.swift in Sources */,
 				24A3E6571D5F6ACD00E268E4 /* EditorViewController.swift in Sources */,
+				1BF626B41EF93AF7002D61C2 /* ExtensionColor.swift in Sources */,
 				1B8A87CB1E959EFE00146C20 /* JLDocumentScope.swift in Sources */,
 				244D58CA1DD0DDCE00DFAAFB /* Vars.swift in Sources */,
 				248C61581DDC6F9F004353F4 /* ProjectsNoProjectsViewCell.swift in Sources */,
+				1B1859E31EF93DEA00B05319 /* ExtensionDate.swift in Sources */,
 				244D58C21DD0DBB700DFAAFB /* SettingsViewController.swift in Sources */,
 				24D36BAC1DDB5196007CFCD0 /* CommentsNoCommentsViewCell.swift in Sources */,
 				1B8A87CF1E959EFE00146C20 /* JLRegexScope.swift in Sources */,
 				24D36BAA1DDB5181007CFCD0 /* CommentsOfflineViewCell.swift in Sources */,
 				24A558591DD5FB8200B2066C /* ArchiveOfflineViewCell.swift in Sources */,
-				1B8A87B01E95617400146C20 /* DateHelper.swift in Sources */,
 				24A3E6531D5F6AC300E268E4 /* ArchiveViewCell.swift in Sources */,
 				1B8A87AE1E95553A00146C20 /* ViewHelper.swift in Sources */,
 				24E06ADF1E1C57AE003E8B09 /* GuidesImageItem.swift in Sources */,
@@ -886,15 +903,18 @@
 				1B8A87D21E959EFE00146C20 /* JLTokenizingScope.swift in Sources */,
 				246DCAEF1DD59F9400A7AC15 /* CreateAccountViewController.swift in Sources */,
 				1B8A87AA1E953C6C00146C20 /* FRCG.swift in Sources */,
-				1BE4FF311E511B8400515395 /* ProjectsSync.swift in Sources */,
+				1BE4FF311E511B8400515395 /* ProjectsSyncOld.swift in Sources */,
 				246DCAF31DD5A16400A7AC15 /* ForgotPassViewController.swift in Sources */,
+				1B1859E11EF93C9F00B05319 /* ExtensionBase64.swift in Sources */,
 				1B354AF61E563CC8006CB707 /* LoginSync.swift in Sources */,
 				24D36BA61DDB431F007CFCD0 /* ApiOfflineViewCell.swift in Sources */,
 				245A55541DD4759C00FE84B9 /* CommentItem.swift in Sources */,
 				245A55521DD4743800FE84B9 /* CommentsViewController.swift in Sources */,
+				1B1859E71EF9CBFF00B05319 /* ExtensionNotification.swift in Sources */,
 				2404B0C01DAEBC5C00D028D2 /* PlayViewController.swift in Sources */,
 				244D58C01DD0DBA700DFAAFB /* LoginViewController.swift in Sources */,
 				1B8A87CE1E959EFE00146C20 /* JLNestedScope.swift in Sources */,
+				1B1859E51EF9A08500B05319 /* ProjectsSync.swift in Sources */,
 				24402E4C1D77FA4900492081 /* ProjectsRealmItem.swift in Sources */,
 				2406B9D91DDF304700D94AF1 /* GuidesLineCell.swift in Sources */,
 				1B0586021E97B09A00ABA497 /* RequestQueueItem.swift in Sources */,

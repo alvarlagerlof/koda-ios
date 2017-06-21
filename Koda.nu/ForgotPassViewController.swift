@@ -21,6 +21,7 @@ class ForgotPassViewController: UIViewController {
         super.viewDidLoad()
         
         Analytics.logEvent("login_forgot_open", parameters: [:])
+        UIApplication.shared.statusBarStyle = .lightContent
 
         
         setUpTextField(emailTextField)

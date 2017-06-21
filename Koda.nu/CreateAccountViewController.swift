@@ -26,6 +26,7 @@ class CreateAccountViewController: UIViewController {
         super.viewDidLoad()
         
         Analytics.logEvent("login_create_open", parameters: [:])
+        UIApplication.shared.statusBarStyle = .lightContent
 
         
         setUpTextField(emailTextField)
@@ -123,8 +124,8 @@ class CreateAccountViewController: UIViewController {
                         try! realm.write {
                             realm.deleteAll()
                         }
-                        NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProjectsDone"), object: self)
-                        _ = ProjectsSync()
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProjectsNow"), object: self)
+                    
 
                         self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
                     }

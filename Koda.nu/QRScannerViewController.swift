@@ -107,12 +107,9 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
                     
                     
                     // Check data
-                    if let title = json["title"].string { vc.recivedTitle = Base64Helper.decode(encoded: title) }
-                    
-                    
-                    if let url = json["url"].string { vc.recivedUrl = Base64Helper.decode(encoded: url) }
-    
-                    if let author = json["author"].string { vc.recivedAuthor = Base64Helper.decode(encoded: author) }
+                    if let title = json["title"].string { vc.recivedTitle = title.base64decode }
+                    if let url = json["url"].string { vc.recivedUrl = url.base64decode }
+                    if let author = json["author"].string { vc.recivedAuthor = author.base64decode }
                     
                     
                     

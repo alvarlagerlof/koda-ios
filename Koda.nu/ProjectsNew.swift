@@ -27,7 +27,7 @@ public class ProjectsNew {
             NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProjectsStarted"), object: self)
 
             
-            let tmpID = "ny_nyare_nyast_" + String(Int64(Date().timeIntervalSince1970 * 1000))
+            let tmpID = "ny_ny_" + String(Int64(Date().timeIntervalSince1970 * 1000))
             
             let object = ProjectsRealmItem()
             object.privateID = tmpID
@@ -48,8 +48,7 @@ public class ProjectsNew {
             }
             
             
-            
-            _ = ProjectsSync(openPrivateID: tmpID, nav: nav)
+            _ = ProjectsSync(nav: nav, openPrivateID: tmpID)
             
             Analytics.logEvent("projects_create_successful", parameters: [:])
 
