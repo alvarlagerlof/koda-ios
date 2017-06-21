@@ -1,14 +1,13 @@
 # koda-ios
 
 > Koda.nu is an app made to make it easy to code on a phone or tablet. <br /><br />
-> <img src="https://github.com/alvarlagerlof/koda-ios/blob/master/Koda.nu/Assets.xcassets/AppIcon.appiconset/Icon-App-72x72%401x.png?raw=true" alt="Icon" width="50"> 
+> <img src="https://github.com/alvarlagerlof/koda-ios/blob/master/assets/icon/icon-store.png?raw=true" alt="Icon" width="70"> 
 
 ## Screenshots
-
-<img src="https://github.com/alvarlagerlof/koda-ios/blob/master/screenshots/iphone/projects.png?raw=true" alt="Projects" width="200"> <img src="https://github.com/alvarlagerlof/koda-ios/blob/master/screenshots/iphone/editor_code.png?raw=true" alt="Edit a project" width="200"> <img src="https://github.com/alvarlagerlof/koda-ios/blob/master/screenshots/iphone/editor_play.png?raw=true" alt="View the result" width="200"> <img src="https://github.com/alvarlagerlof/koda-ios/blob/master/screenshots/iphone/api.png?raw=true" alt="API" width="200">
+<img src="https://github.com/alvarlagerlof/koda-ios/blob/master/assets/screenshots/iphone/1.jpg?raw=true" width="200"> <img src="https://github.com/alvarlagerlof/koda-ios/blob/master/assets/screenshots/iphone/2.jpg?raw=true" width="200"> <img src="https://github.com/alvarlagerlof/koda-ios/blob/master/assets/screenshots/iphone/3.jpg?raw=true" width="200"> <img src="https://github.com/alvarlagerlof/koda-ios/blob/master/assets/screenshots/iphone/4.jpg?raw=true" width="200"> <img src="https://github.com/alvarlagerlof/koda-ios/blob/master/assets/screenshots/iphone/5.jpg?raw=true" width="200">
 
 ## Downloads
-Koda.nu is free to download on App Store (Coming soon) and [Google Play](https://play.google.com/store/apps/details?id=com.alvarlagerlof.koda)
+Koda.nu is free to download on [App Store](https://itunes.apple.com/us/app/koda-nu/id1143799567) and [Google Play](https://play.google.com/store/apps/details?id=com.alvarlagerlof.koda)
 
 ## Android repo
 The repo for the android app is [here](https://github.com/alvarlagerlof/koda-android)
