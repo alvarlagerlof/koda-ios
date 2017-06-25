@@ -166,12 +166,11 @@ class EditorViewController: UIViewController, UITextViewDelegate {
     func specialCharsBarSetup() {
         
         // Lists
-        let specialChars = ["(", ")", ",", ".", ";", "{", "}",
-                            "\"", ":",
+        let specialChars = ["( )", "{ }", "[ ]", ".", ",", "\" \"",
+                            ":",
                             "-", "+", "*", "/",
                             "=", "!",
-                            "<", ">",
-                            "[", "]",
+                             "<",  ">",
                             "%", "?",
                             "&", "|"]
         
@@ -182,7 +181,7 @@ class EditorViewController: UIViewController, UITextViewDelegate {
         
         // Add tooblarItems
         for (index, item) in specialChars.enumerated() {
-            if (index < 7) {
+            if (index < 6) {
                 toolbarItems.append(UIBarButtonItem(title: (index == 0 ? "  " : "   ") + item + "   " , style: .plain, target: nil, action: #selector(addSpecialChar)))
             } else {
                 overflowItems.append(item)
@@ -219,6 +218,13 @@ class EditorViewController: UIViewController, UITextViewDelegate {
             optionMenu.addAction(UIAlertAction(title: item, style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
                 self.textEditor.insertText(item)
+                if item.characters.count == 2 {
+                    if let selectedRange = self.textEditor.selectedTextRange {
+                        if let newPosition = self.textEditor.position(from: selectedRange.start, offset: -1) {
+                            self.textEditor.selectedTextRange = self.textEditor.textRange(from: newPosition, to: newPosition)
+                        }
+                    }
+                }
         
             }))
             
@@ -237,10 +243,23 @@ class EditorViewController: UIViewController, UITextViewDelegate {
         // Show
         optionMenu.popoverPresentationController?.barButtonItem = sender
         self.present(optionMenu, animated: true, completion: nil)
-        
-        
 
     }
+    
+    // Special chars bar click
+    func addSpecialChar(sender: UIBarButtonItem) {
+        let text = sender.title?.replacingOccurrences(of: " ", with: "")
+        self.textEditor.insertText(text!)
+        if text?.characters.count == 2 {
+            if let selectedRange = self.textEditor.selectedTextRange {
+                if let newPosition = self.textEditor.position(from: selectedRange.start, offset: -1) {
+                    self.textEditor.selectedTextRange = self.textEditor.textRange(from: newPosition, to: newPosition)
+                }
+            }
+        }
+    }
+    
+    
     
     
     func reload(_ sender: UIBarButtonItem) {
@@ -251,10 +270,7 @@ class EditorViewController: UIViewController, UITextViewDelegate {
     
     
     
-    // Special chars bar click
-    func addSpecialChar(sender: UIBarButtonItem) {
-        self.textEditor.insertText((sender.title?.replacingOccurrences(of: " ", with: ""))!)
-    }
+   
     
     
     
