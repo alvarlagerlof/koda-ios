@@ -1,7 +1,5 @@
-# koda-ios
-
-> Koda.nu is an app made to make it easy to code on a phone or tablet. <br /><br />
-> <img src="https://github.com/alvarlagerlof/koda-ios/blob/master/assets/icon/icon-store.png?raw=true" alt="Icon" width="70"> 
+# 📱 Koda for iOS
+Koda.nu is an app made to make it easy to code on a phone or tablet. 
 
 ## Screenshots
 <img src="https://github.com/alvarlagerlof/koda-ios/blob/master/assets/screenshots/iphone/1.jpg?raw=true" width="200"> <img src="https://github.com/alvarlagerlof/koda-ios/blob/master/assets/screenshots/iphone/2.jpg?raw=true" width="200"> <img src="https://github.com/alvarlagerlof/koda-ios/blob/master/assets/screenshots/iphone/3.jpg?raw=true" width="200"> <img src="https://github.com/alvarlagerlof/koda-ios/blob/master/assets/screenshots/iphone/4.jpg?raw=true" width="200"> <img src="https://github.com/alvarlagerlof/koda-ios/blob/master/assets/screenshots/iphone/5.jpg?raw=true" width="200">
