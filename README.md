@@ -1,4 +1,4 @@
-# 📱 Koda for iOS
+# Koda for iOS
 Koda.nu is an app made to make it easy to code on a phone or tablet. 
 
 ## Screenshots
